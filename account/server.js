@@ -23,14 +23,16 @@ app.use(RouterFlight);
 
 const start = async () => {
   try {
-    await mongoose.connect(process.env.URI);
+    await mongoose.connect(
+      "mongodb+srv://thanhlong:TTTravelDB@atlascluster.ra3ur9s.mongodb.net/dbTravel"
+    );
     console.log("Connect db Account success");
   } catch (err) {
     console.log(err);
   }
 };
 
-app.listen(process.env.PORT, () => {
+app.listen(4001, () => {
   console.log("Listening port 4001");
 });
 start();
