@@ -161,7 +161,6 @@ export const OrderProvider = ({ children }) => {
         await setUser(userObj);
         setStateLogin(statusLoginBool);
       } else {
-        console.log("aaaaaaaaa");
         localStorage.removeItem("user");
         localStorage.removeItem("statusLogin");
       }
@@ -203,7 +202,7 @@ export const OrderProvider = ({ children }) => {
 
   useEffect(() => {
     checkSetGender(
-      gender.trim().length >= 2 &&
+      gender.trim().length >= 0 &&
         !gender.trim().includes("Nam") &&
         !gender.trim().includes("Nữ")
         ? false
@@ -443,7 +442,8 @@ export const OrderProvider = ({ children }) => {
         setVeDangSua,
         ves,
         setVes,
-        donDangSua, setDonDangSua,
+        donDangSua,
+        setDonDangSua,
       }}
     >
       {children}

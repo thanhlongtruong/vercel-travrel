@@ -119,20 +119,24 @@ function HistoryDon({ id, dtChuyenBays }) {
             className="w-full h-fit border-2 p-2 rounded-lg mb-5"
           >
             <div className="flex justify-between">
-              <div className="font-semibold">Đơn hàng {index + 1}</div>
-              <div>{converDateToVNDate(donhang.createdAt)}</div>
+              <div className="font-semibold line-clamp-1">
+                Đơn hàng {index + 1}
+              </div>
+              <div className="">
+                {converDateToVNDate(donhang.createdAt)}
+              </div>
             </div>
             <div className="flex justify-between">
               <div>
-                <span className="font-semibold">Số lượng vé:</span>
+                <span className="font-semibold line-clamp-1">Số lượng vé:</span>
                 {donhang.soLuongVe}
               </div>
               <div>
-                <span className="font-semibold">Tổng giá:</span>
+                <span className="font-semibold line-clamp-1">Tổng giá:</span>
                 {donhang.tongGia}
               </div>
               <div
-                className="font-semibold cursor-pointer rounded-md bg-[#0194f3] p-2 text-white"
+                className="font-semibold line-clamp-1 cursor-pointer rounded-md bg-[#0194f3] p-2 text-white"
                 onClick={() => handleHistoryVe(index)}
               >
                 Xem chi tiết
@@ -370,7 +374,6 @@ function SuaVe({ ve, dtChuyenBays, donhang }) {
         checkSoGhe &&
         (soKy !== ve.soKyHanhLy || hangVe !== ve.hangVe)
       ) {
-
         let flagCheckAllFetch = 0;
 
         let newGiaVe =

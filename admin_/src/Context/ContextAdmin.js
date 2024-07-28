@@ -63,8 +63,8 @@ export const OrderProvider = ({ children }) => {
       window.alert("Sai mật khẩu");
     }
     if (
-      isUser.numberPhone === "0967994184" &&
-      isUser.password === isInputPassword
+      isUser.numberPhone === "0967994185" &&
+      isInputPassword === "admin@123"
     ) {
       localStorage.setItem("user", JSON.stringify(isUser));
       naviLogin("/AdminHome");
@@ -86,7 +86,7 @@ export const OrderProvider = ({ children }) => {
   // '*': Tháng (1-12)
   // '*': Ngày trong tuần (0-6, 0 là Chủ Nhật)
   //TODO auto remove user in localStorage
-  schedule.scheduleJob("0 10 * * *", () => {
+  schedule.scheduleJob("0,15,30,45 * * * *", () => {
     localStorage.removeItem("user");
     localStorage.removeItem("statusLogin");
   });

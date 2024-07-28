@@ -123,52 +123,59 @@ const QuanLyDanhSachTaiKhoan = () => {
             </tr>
           </thead>
           <tbody>
-            {accounts.map((account, index) => (
-              <tr className="text-center">
-                <td className="border border-black px-3 py-2">{index + 1}</td>
-                <td className="border border-black px-3 py-2">{account._id}</td>
-                <td className="border border-black px-3 py-2">
-                  {account.numberPhone}
-                </td>
-                <td className="border border-black px-3 py-2">
-                  {account.password}
-                </td>
-                <td className="border border-black px-3 py-2">
-                  {account.fullName}
-                </td>
-                <td
-                  className={`border border-black px-3 py-2 font-medium text-green-400 ${
-                    account.status === "Tài khoản đã bị khóa"
-                      ? "text-red-600"
-                      : ""
-                  }`}
-                >
-                  {account.status}
-                </td>
-                <td className="border px-3 py-2 flex gap-5 justify-center">
-                  <button
-                    type="button"
-                    className="w-[100px] h-10 border rounded-md bg-slate-500 text-white"
-                    onClick={() => handleViewDetails(account)}
-                  >
-                    Xem chi tiết
-                  </button>
-                  <button
-                    type="button"
-                    className={`w-[150px] p-2 h-10 rounded-md text-white ${
-                      account.status === "Tài khoản đã bị khóa"
-                        ? "bg-green-600"
-                        : "bg-red-600"
-                    }`}
-                    onClick={() => toggleLockAccount(account)}
-                  >
-                    {account.status === "Đang hoạt động"
-                      ? "Khóa tài khoản"
-                      : "Mở tài khoản"}
-                  </button>
-                </td>
-              </tr>
-            ))}
+            {accounts &&
+              accounts
+                .filter((a) => a.numberPhone !== "0967994185")
+                .map((account, index) => (
+                  <tr className="text-center">
+                    <td className="border border-black px-3 py-2">
+                      {index + 1}
+                    </td>
+                    <td className="border border-black px-3 py-2">
+                      {account._id}
+                    </td>
+                    <td className="border border-black px-3 py-2">
+                      {account.numberPhone}
+                    </td>
+                    <td className="border border-black px-3 py-2">
+                      {account.password}
+                    </td>
+                    <td className="border border-black px-3 py-2">
+                      {account.fullName}
+                    </td>
+                    <td
+                      className={`border border-black px-3 py-2 font-medium text-green-400 ${
+                        account.status === "Tài khoản đã bị khóa"
+                          ? "text-red-600"
+                          : ""
+                      }`}
+                    >
+                      {account.status}
+                    </td>
+                    <td className="border px-3 py-2 flex gap-5 justify-center">
+                      <button
+                        type="button"
+                        className="w-[100px] h-10 border rounded-md bg-slate-500 text-white"
+                        onClick={() => handleViewDetails(account)}
+                      >
+                        Xem chi tiết
+                      </button>
+                      <button
+                        type="button"
+                        className={`w-[150px] p-2 h-10 rounded-md text-white ${
+                          account.status === "Tài khoản đã bị khóa"
+                            ? "bg-green-600"
+                            : "bg-red-600"
+                        }`}
+                        onClick={() => toggleLockAccount(account)}
+                      >
+                        {account.status === "Đang hoạt động"
+                          ? "Khóa tài khoản"
+                          : "Mở tài khoản"}
+                      </button>
+                    </td>
+                  </tr>
+                ))}
           </tbody>
         </table>
       </div>
