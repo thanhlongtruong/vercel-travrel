@@ -53,6 +53,8 @@ router.post("/api/post_status_donhang", async (req, res) => {
     if (!fetchDH.ok) {
       throw new Error("Not change status don hang", maDon);
     }
+    const data = await fetchDH.json();
+    console.log("Cập nhật trạng thái đơn hàng thành công:", data);
   } catch (err) {
     res.status(400).json({ message: err.message });
   }
