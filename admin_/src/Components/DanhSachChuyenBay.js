@@ -43,7 +43,7 @@ const DanhSachChuyenBay = () => {
     const fetchFlight = async () => {
       try {
         const response = await fetch(
-          "http://localhost:4001/api/get/all_flights"
+          "https://vercel-travrel.vercel.app/api/get/all_flights"
         );
 
         if (!response.ok) {
@@ -62,7 +62,7 @@ const DanhSachChuyenBay = () => {
   const searchFlight = async () => {
     try {
       const response = await fetch(
-        `http://localhost:4001/api/get/flight/${stateChuyenBay}`
+        `https://vercel-travrel.vercel.app/api/get/flight/${stateChuyenBay}`
       );
       if (!response.ok) {
         if (!stateChuyenBay) setListFlight(allFlight);

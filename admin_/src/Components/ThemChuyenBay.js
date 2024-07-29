@@ -77,7 +77,8 @@ const ThemChuyenBay = ({ isVisible, onClose }) => {
     if (isNgayDi > isNgayDen)
       newErrors.gioDen = "Ngày đến không được sớm hơn ngày di";
     else if (isNgayDi == isNgayDen && isGioDi >= isGioDen)
-      newErrors.gioDen = "Cùng một ngày thì giờ đến không được trễ hay bằng giờ đi";
+      newErrors.gioDen =
+        "Cùng một ngày thì giờ đến không được trễ hay bằng giờ đi";
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
@@ -101,13 +102,16 @@ const ThemChuyenBay = ({ isVisible, onClose }) => {
       khoiLuongQuyDinhTrenMotVe: isSoHanhLy,
     };
     try {
-      const response = await fetch("http://localhost:4001/api/add_flight", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json", // Kiểu nội dung của request
-        },
-        body: JSON.stringify(flight),
-      });
+      const response = await fetch(
+        "https://vercel-travrel.vercel.app/api/add_flight",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json", // Kiểu nội dung của request
+          },
+          body: JSON.stringify(flight),
+        }
+      );
 
       if (!response.ok) {
         throw new Error("Network response was not ok");

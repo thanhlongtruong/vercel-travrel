@@ -15,7 +15,7 @@ function QuanLyDonHang() {
     const fetchDonHang = async () => {
       try {
         const response = await fetch(
-          `http://localhost:4001/api/get/all_donhang`
+          `https://vercel-travrel.vercel.app/api/get/all_donhang`
         );
         if (!response.ok) {
           throw new Error("Network response was not ok");
@@ -34,7 +34,9 @@ function QuanLyDonHang() {
   const handleXemChiTietDon = async (maDon) => {
     console.log("alo");
     try {
-      const response = await fetch(`http://localhost:4001/api/get_all_tickets`);
+      const response = await fetch(
+        `https://vercel-travrel.vercel.app/api/get_all_tickets`
+      );
       if (!response.ok) {
         throw new Error("Network response was not ok");
       } else {
@@ -54,7 +56,7 @@ function QuanLyDonHang() {
   const searchDon = async () => {
     try {
       const response = await fetch(
-        `http://localhost:4001/api/get_donhang/${stateDon}`
+        `https://vercel-travrel.vercel.app/api/get_donhang/${stateDon}`
       );
       // if (!response.ok) {
       //   throw new Error("Network response was not ok");

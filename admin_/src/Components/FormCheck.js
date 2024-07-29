@@ -36,7 +36,7 @@ export function Login() {
     const fetchAccount = async () => {
       try {
         const response = await fetch(
-          `http://localhost:4001/api/get_user/find_number_phone/${isInput}`
+          `https://vercel-travrel.vercel.app/api/get_user/find_number_phone/${isInput}`
         );
         if (!response.ok) {
           throw new Error("Network response was not ok");

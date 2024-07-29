@@ -18,7 +18,7 @@ const XoaChuyenBay = ({ isVisible, onClose, flight }) => {
     if (isId) {
       try {
         const response = await fetch(
-          `http://localhost:4001/api/delete/flight/${isId._id}`,
+          `https://vercel-travrel.vercel.app/api/delete/flight/${isId._id}`,
           {
             method: "DELETE", // Phương thức HTTP
             headers: {

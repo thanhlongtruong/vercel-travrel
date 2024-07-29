@@ -22,7 +22,9 @@ const QuanLyDanhSachTaiKhoan = () => {
 
   const fetchAccount = async () => {
     try {
-      const response = await fetch(`http://localhost:4001/api/getUser`);
+      const response = await fetch(
+        `https://vercel-travrel.vercel.app/api/getUser`
+      );
       if (!response.ok) {
         throw new Error("Network response was not ok");
       }
@@ -44,7 +46,7 @@ const QuanLyDanhSachTaiKhoan = () => {
         : "Đang hoạt động";
     try {
       const response = await fetch(
-        `http://localhost:4001/api/update_user/${account._id}`,
+        `https://vercel-travrel.vercel.app/api/update_user/${account._id}`,
         {
           method: "PATCH", // Phương thức HTTP
           headers: {

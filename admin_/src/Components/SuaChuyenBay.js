@@ -84,7 +84,8 @@ const SuaThongTinChuyenBay = ({ isVisible, onClose, flight }) => {
     if (isNgayDi > isNgayDen)
       newErrors.gioDen = "Ngày đến không được sớm hơn ngày di";
     else if (isNgayDi == isNgayDen && isGioDi >= isGioDen)
-      newErrors.gioDen = "Cùng một ngày thì giờ đến không được trễ hay bằng giờ đi";
+      newErrors.gioDen =
+        "Cùng một ngày thì giờ đến không được trễ hay bằng giờ đi";
 
     setErrors(newErrors);
 
@@ -109,7 +110,7 @@ const SuaThongTinChuyenBay = ({ isVisible, onClose, flight }) => {
 
     try {
       const response = await fetch(
-        `http://localhost:4001/api/update/flight/${flight._id}`,
+        `https://vercel-travrel.vercel.app/api/update/flight/${flight._id}`,
         {
           method: "PATCH",
           headers: {
