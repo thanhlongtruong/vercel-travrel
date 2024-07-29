@@ -281,17 +281,17 @@ export const XemDanhSachChuyenBay = () => {
     <>
       {isShowInterfaceLogin && <InterFaceLogin />}
       {isOpenChooseHangVe && <ChinhSoLuongVaHangVeTaiCB />}
-      <div className="relative h-fit w-screen py-5">
+      <div className="relative h-screen w-screen py-5">
         <Header />
         {isShowOptionSetting_LoginSuccess && <LoginSuccess />}
         {dialogDoiTimKiem && <DoiTimKiemChuyenBay />}
         {}
-        <div className="flex justify-center bg-slate-100  gap-6">
-          <div className="sticky top-[87px] z-20 h-[500px] flex flex-col items-center w-[25%] overflow-y-scroll overflow-hidden">
-            <div id="Khuyen-mai">
+        <div className="flex justify-center h-full bg-slate-100 sm:gap-6 gap-2">
+          <div className="sticky z-0 top-[87px] h-[500px] flex flex-col items-center sm:w-[25%] w-2/12 overflow-y-scroll">
+            {/* <div id="Khuyen-mai">
               <div className="flex flex-row items-center mt-4"></div>
               <div className="flex flex-row items-center justify-between"></div>
-            </div>
+            </div> */}
             <div className="w-full">
               <div id="Bo-loc" className="mt-4">
                 <div className="div-flex-adjust-justify-between ">
@@ -401,7 +401,7 @@ export const XemDanhSachChuyenBay = () => {
             </div>
           </div>
 
-          <div className="flex flex-col h-fit items-center w-[55%]">
+          <div className="flex flex-col h-fit items-center sm:w-[55%] w-10/12">
             <div className="relative w-full h-fit flex items-center justify-center overflow-hidden">
               <svg
                 viewBox="0 0 672 185"
@@ -498,11 +498,11 @@ export const XemDanhSachChuyenBay = () => {
                 onMouseLeave={() => setAdjustHovered(false)}
                 className={`${isAjustHovered ? "w-[80%]" : "w-[60%]"} max-h-[45%] bg-white w-[60%] py-3 px-5 rounded-3xl absolute z-10 top-[4%] left-[1%] transform translate-x-0 div-flex-adjust-justify-between`}
               >
-                <div>
-                  <p className="text-lg font-bold leading-[30px] line-clamp-1">
+                <div className="flex flex-col">
+                  <p className="sm:text-lg sm:font-bold text-[12px] sm:leading-[30px] line-clamp-1">
                     {dtSelect1Value} →{dtSelect2Value}
                   </p>
-                  <span className="text-base font-semibold text-[#687176] leading-[35px]">
+                  <span className="sm:text-base text-[12px] sm:font-semibold text-[#687176] sm:leading-[35px] line-clamp-1">
                     {format(new Date(dtNgayDi), "EEEE, d 'thg' M yyyy", {
                       locale: vi,
                     })}
@@ -660,7 +660,7 @@ function ShowFlight({ flights }) {
             <button
               key={flight._id}
               ref={(el) => (itemRefs.current[index] = el)}
-              className="bg-[#0194F3] right-3 absolute bottom-6 text-white w-fit h-fit px-4 py-2 lg:px-[35px] lg:py-[7px] mt-[30px] rounded-lg"
+              className="bg-[#0194F3] right-3 absolute bottom-6 text-white w-fit h-fit px-[8px] py-[4px] md:px-[20px] md:py-[7px] mt-[30px] rounded-lg"
               onClick={() => handleChooseOpenHangVe(flight)}
             >
               Chọn

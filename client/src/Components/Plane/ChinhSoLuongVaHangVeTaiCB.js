@@ -94,7 +94,7 @@ export default function ChinhSoLuongVaHangVeTaiCB() {
         onClick={handleChooseOpenHangVe}
         className="absolute z-20 w-full h-full"
       ></div>
-      <div className="absolute z-20 m-auto h-fit w-[45%] rounded-lg bg-white p-4">
+      <div className="absolute z-20 m-auto h-fit md:w-[45%] w-11/12 rounded-lg bg-white p-4">
         <div className="flex flex-col w-full">
           <div className="flex gap-2 items-center">
             <p className="px-[2%] rounded-2xl text-2xl font-bold select-none">
@@ -233,8 +233,8 @@ export default function ChinhSoLuongVaHangVeTaiCB() {
         </div>
       </div>
       {isStateShowNotiGiaVe && (
-        <div className="w-[40%] select-none absolute z-50 h-fit p-2 bg-white rounded-lg">
-          <p className="font-semibold text-lg text-[#0194F3]">
+        <div className="md:w-[40%] w-11/12 select-none absolute z-50 h-fit p-2 bg-white rounded-lg overflow-y-scroll ">
+          <p className="font-semibold lg:text-[16px] md:text-[16px] text-[12px] text-[#0194F3]">
             Giá vé đang được hiển thị là giá thuộc về vé thường. Trang này quý
             khách chỉ chọn số lượng và trang kế tiếp quý khách có thể chọn hạng
             vé cho từng vé mà quý khách chọn.{" "}

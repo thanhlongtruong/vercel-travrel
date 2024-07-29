@@ -11,7 +11,7 @@ const ItemFlight = (isFlight) => {
         type="button"
         className="h-[130px] w-full bg-white p-3 flex justify-between items-center"
       >
-        <div className="flex items-center text-2xl gap-x-3 font-semibold w-fit h-fit">
+        <div className="flex items-center sm:text-2xl gap-x-3 font-semibold w-fit h-fit">
           <div className="flex flex-col gap-y-1 items-center">
             <span className="text-sm text-[#687176]">{isFlight.dateDi}</span>
             <span>{isFlight.timeDi}</span>
@@ -22,7 +22,7 @@ const ItemFlight = (isFlight) => {
           <div className="flex flex-col gap-y-1 items-center">
             <div className="flex flex-row items-center w-fit">
               <div className="w-[12px] md:w-[24px] h-[12px] md:h-[24px] border-2 border-[#687172] rounded-full"></div>
-              <div className="w-[30px] md:w-[70px] h-fit border-[1px] border-[#687172]"></div>
+              <div className="w-[20px] md:w-[70px] h-fit border-[1px] border-[#687172]"></div>
               <div className="w-[12px] md:w-[24px] h-[12px] md:h-[24px] border-2 border-[#687172] bg-[#687172] rounded-full"></div>
             </div>
           </div>
@@ -34,9 +34,11 @@ const ItemFlight = (isFlight) => {
             </span>
           </div>
         </div>
-        <div className="flex text-xl items-center font-bold text-[#FF5E1F]">
+        <div className="flex sm:text-lg items-center font-bold text-[#FF5E1F]">
           {isFlight.giaVe} {" VND"}
-          <span className="text-sm font-semibold text-[#687176]">/khách</span>
+          <span className="text-sm sm:w-fit w-0 overflow-hidden font-semibold text-[#687176]">
+            /khách
+          </span>
         </div>
       </button>
       {hideDetailItemFlight && (

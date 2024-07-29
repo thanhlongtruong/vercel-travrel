@@ -3,7 +3,7 @@ import "../../src/TrangThanhToan.css";
 import Header from "./Header";
 import InfoTicket from "./Plane/InfoTicket";
 import { useLocation } from "react-router-dom";
-
+import axios from "axios";
 function TrangThanhToan() {
   const [isCheckPickPay, setCheckPickPay] = useState(false);
 
@@ -59,36 +59,26 @@ function TrangThanhToan() {
   };
 
   const handlePay = async () => {
+    const data = {
+      private_key:
+        "pk_presspay_7914786efc32aa8635cad9b16b48a6e8f350e3856f39c4abc5bcc6f148536366",
+      amount: isTongPriceTicket,
+      currency: "VND",
+      message: idUser + " order " + dataTicket.length + " ticket of " + idDH,
+      userID: idUser,
+      orderID: idDH,
+      return_url: "https://vercel-travrel-home.vercel.app/XemDanhSachChuyenBay",
+    };
+    console.log(data);
     try {
-      const dhCreate = await fetch(
+      const response = await axios.post(
         "https://presspay-api.azurewebsites.net/api/v1/payment",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            private_key:
-              "pk_presspay_7914786efc32aa8635cad9b16b48a6e8f350e3856f39c4abc5bcc6f148536366",
-            amount: formatNumber(parseFloat(isTongPriceTicket)),
-            currency: "VND",
-            message:
-              idUser + " order " + dataTicket.length + " ticket of " + idDH,
-            userID: idUser,
-            orderID: idDH,
-            return_url:
-              "https://vercel-travrel-home.vercel.app/XemDanhSachChuyenBay",
-          }),
-        }
+        data
       );
-
-      const dhJS = await dhCreate.json();
-
-      const dhId = dhJS._id;
-
+      window.location.replace(response.data.url);
       // await handleResTicket(dhId);
     } catch (error) {
-      console.error("Bug when creating order:", error);
+      console.log("Bug when creating order:", error);
     }
   };
 

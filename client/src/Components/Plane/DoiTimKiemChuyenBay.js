@@ -99,7 +99,7 @@ export default function DoiTimKiemChuyenBay() {
         }}
         className="absolute z-[25] w-full h-full bg-black/50"
       ></div>
-      <div className="w-[50%] z-30 h-fit rounded-xl p-[1%] bg-white fixed top-[25%] left-[25%] transform translate-x-0 translate-y-0 flex flex-col items-center">
+      <div className="md:w-[50%] w-11/12 z-30 h-fit rounded-xl p-[1%] bg-white fixed top-[25%] md:left-[25%] left-[3%] transform translate-x-0 translate-y-0 flex flex-col items-center">
         {/* sân bay */}
         <div className="w-[90%] flex flex-row relative">
           <div className="w-[50%]">
