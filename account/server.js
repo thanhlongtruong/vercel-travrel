@@ -21,6 +21,11 @@ app.use(RouterTicket);
 app.use(RouterDH);
 app.use(RouterFlight);
 
+// Xử lý các yêu cầu khác
+app.use('/', (req, res) => {
+  res.send('Hello World!');
+});
+
 const start = async () => {
   try {
     await mongoose.connect(

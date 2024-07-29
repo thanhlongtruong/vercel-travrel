@@ -8,24 +8,11 @@
   ],
   "routes": [
     {
-      "src": "/api/getUser",
-      "dest": "/routers/Account.js"
-    },
-    {
-      "src": "/api/.*",
-      "dest": "/routers/RouterDH.js"
-    },
-    {
-      "src": "/api/.*",
-      "dest": "/routers/RouterFlight.js"
-    },
-    {
-      "src": "/api/.*",
-      "dest": "/routers/RouterTicket.js"
-    },
-    {
       "src": "/(.*)",
       "dest": "/server.js"
     }
-  ]
+  ],
+  "env": {
+    "MONGODB_URI": "mongodb+srv://thanhlong:TTTravelDB@atlascluster.ra3ur9s.mongodb.net/dbTravel"
+  }
 }
