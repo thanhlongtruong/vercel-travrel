@@ -89,7 +89,7 @@ const QuanLyDanhSachTaiKhoan = () => {
     <div className="w-full">
       <Header />
       <div className="justify-center flex m-960">
-        <h1 className="font-bold text-2xl">DANH SÁCH TÀI KHOẢN KHÁCH HÀNG</h1>
+        <h1 className="font-bold text-2xl sm:text-xl">DANH SÁCH TÀI KHOẢN KHÁCH HÀNG</h1>
       </div>
       <div className="p-2 w-11/12 m-auto flex">
         <input

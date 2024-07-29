@@ -87,7 +87,7 @@ export function Login() {
         onClick={handleShowInterfaceLogin}
         className="absolute z-20 w-full h-full"
       ></div>
-      <div className="absolute z-40 lg:m-auto h-full lg:w-[450px] rounded-lg bg-white p-4 w-full ">
+      <div className="absolute z-40 lg:m-auto lg:h-fit h-full md:h-fit md:w-[450px] lg:w-[450px] rounded-lg bg-white p-4 w-full ">
         <div className="div-flex-adjust-justify-between flex h-14 w-full">
           <p className="w-[90%] text-2xl font-bold"> Đăng nhập</p>
           <div className="w-[10%]" onClick={handleShowInterfaceLogin}>

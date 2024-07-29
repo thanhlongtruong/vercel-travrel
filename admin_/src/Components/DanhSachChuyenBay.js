@@ -82,15 +82,15 @@ const DanhSachChuyenBay = () => {
     setDeleteDialogVisible(true);
   };
   return (
-    <div className="w-screen overflow-x-hidden">
+    <div className="w-full">
       <Header />
-      <div className="relative w-screen lg:flex-col flex md:flex-row justify-between items-center mt-3  ">
-        <h1 className="font-bold lg:text-2xl text-blue-600 absolute lg:left-1/2 transform -translate-x-1/2 md:text-xl left-1/3  ">
+      <div className="justify-center flex m-960 ">
+        <h1 className="font-bold lg:text-2xl text-blue-600 absolute lg:left-1/2 transform -translate-x-1/2 md:text-xl sm:text-sm left-1/3  ">
           DANH SÁCH CHUYẾN BAY TRONG HỆ THỐNG
         </h1>
         <button
           type="button"
-          className="bg-green-600 text-white rounded-md lg:h-10 lg:w-[150px] font-medium text-sm ml-auto lg:mr-16 md: p-1 w-[130px] mr-28"
+          className="bg-green-600 text-white rounded-md lg:h-10 lg:w-[150px] font-medium text-sm ml-auto lg:mr-16 md: p-1 w-[130px] mr-28 mt-[50px] "
           onClick={() => setAddDialogVisible(true)}
         >
           Thêm chuyến bay

@@ -7,6 +7,12 @@ import { useLocation } from "react-router-dom";
 function TrangThanhToan() {
   const [isCheckPickPay, setCheckPickPay] = useState(false);
 
+  function formatNumber(num) {
+    const parts = num.toString().split(".");
+    parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    return parts.join(",");
+  }
+
   const handleCheckPickPay = () => {
     setCheckPickPay(!isCheckPickPay);
   };
@@ -64,7 +70,7 @@ function TrangThanhToan() {
           body: JSON.stringify({
             private_key:
               "pk_presspay_7914786efc32aa8635cad9b16b48a6e8f350e3856f39c4abc5bcc6f148536366",
-            amount: isTongPriceTicket,
+            amount: formatNumber(parseFloat(isTongPriceTicket)),
             currency: "VND",
             message:
               idUser + " order " + dataTicket.length + " ticket of " + idDH,

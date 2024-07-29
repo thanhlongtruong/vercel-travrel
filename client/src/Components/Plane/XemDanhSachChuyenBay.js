@@ -20,6 +20,10 @@ export const XemDanhSachChuyenBay = () => {
   let dtSelect2Value = localStorage.getItem("dtSelect2Value");
   let dtNgayDi = localStorage.getItem("dtNgayDi");
 
+  if (!dtSelect1Value || !dtSelect2Value || !dtNgayDi) {
+  window.location.href=
+}
+
   const {
     dialogDoiTimKiem,
     handleDialogDoiTimKiem,

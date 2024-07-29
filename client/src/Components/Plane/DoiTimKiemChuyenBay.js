@@ -1,6 +1,5 @@
 import { useRef, useState, useContext, useEffect } from "react";
 import { CONTEXT } from "../../Context/WindowLogin.js";
-import { format, addDays, parse } from "date-fns";
 import { vi } from "date-fns/locale";
 
 export default function DoiTimKiemChuyenBay() {
@@ -20,21 +19,15 @@ export default function DoiTimKiemChuyenBay() {
     setBay,
     isDap,
     setDap,
-    dialogDoiTimKiem,
-    handleDialogDoiTimKiem,
     setDialogDoiTimKiem,
     today,
-    setToday,
-    setSwitchNgayBay,
     diemDenArray,
-    setDiemDenArray,
     diemDiArray,
     setDiemDiArray,
     select1Value,
     setSelect1Value,
     select2Value,
     setSelect2Value,
-    ngayDi,
     setNgayDi,
     searchForChuyenBay,
   } = useContext(CONTEXT);
