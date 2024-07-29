@@ -22,8 +22,8 @@ app.use(RouterDH);
 app.use(RouterFlight);
 
 // Xử lý các yêu cầu khác
-app.use('/', (req, res) => {
-  res.send('Hello World!');
+app.use("/", (req, res) => {
+  res.send("Hello World 1!");
 });
 
 const start = async () => {

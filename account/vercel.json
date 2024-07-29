@@ -13,6 +13,6 @@
     }
   ],
   "env": {
-    "MONGODB_URI": "mongodb+srv://thanhlong:TTTravelDB@atlascluster.ra3ur9s.mongodb.net/dbTravel"
+    "URI": "mongodb+srv://thanhlong:TTTravelDB@atlascluster.ra3ur9s.mongodb.net/dbTravel"
   }
 }
