@@ -34,13 +34,10 @@ export const OrderProvider = ({ children }) => {
 
   const navi = useNavigate();
   const searchForChuyenBay = () => {
-    navi("/XemDanhSachChuyenBay", {
-      state: {
-        dtSelect1Value: select1Value,
-        dtSelect2Value: select2Value,
-        dtNgayDi: ngayDi,
-      },
-    });
+    localStorage.setItem("dtSelect1Value", select1Value);
+    localStorage.setItem("dtSelect2Value", select2Value);
+    localStorage.setItem("dtNgayDi", ngayDi);
+    navi("/XemDanhSachChuyenBay");
   };
 
   //Trang History
@@ -113,6 +110,10 @@ export const OrderProvider = ({ children }) => {
     setStateLogin(false);
     localStorage.removeItem("user");
     localStorage.removeItem("StateLogin");
+    localStorage.removeItem("dtSelect1Value");
+    localStorage.removeItem("dtSelect2Value");
+    localStorage.removeItem("dtNgayDi");
+
     window.location.reload();
   };
 
@@ -125,6 +126,9 @@ export const OrderProvider = ({ children }) => {
   schedule.scheduleJob("10 10 * * *", () => {
     localStorage.removeItem("user");
     localStorage.removeItem("statusLogin");
+    localStorage.removeItem("dtSelect1Value");
+    localStorage.removeItem("dtSelect2Value");
+    localStorage.removeItem("dtNgayDi");
   });
 
   //TODO auto off noti login fail

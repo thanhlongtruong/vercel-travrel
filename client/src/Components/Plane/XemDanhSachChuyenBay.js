@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import { useState, useEffect, useRef, useContext, useCallback } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import Box from "@mui/material/Box";
 import Slider from "@mui/material/Slider";
 import "react-slideshow-image/dist/styles.css";
@@ -12,33 +12,26 @@ import Header from "../Header.js";
 import ItemFlight from "./ItemFlight.js";
 import { LoginSuccess } from "../Setting/StateLoginSucces.js";
 import InterFaceLogin from "../Home/InterFaceLogin.js";
-import { format, addDays, parse } from "date-fns";
+import { format } from "date-fns";
 import { vi } from "date-fns/locale";
 
 export const XemDanhSachChuyenBay = () => {
+  let dtSelect1Value = localStorage.getItem("dtSelect1Value");
+  let dtSelect2Value = localStorage.getItem("dtSelect2Value");
+  let dtNgayDi = localStorage.getItem("dtNgayDi");
+
   const {
     dialogDoiTimKiem,
     handleDialogDoiTimKiem,
-    isBay,
-    isDap,
-    today,
-    switchNgayBay,
-    setSwitchNgayBay,
     isShowInterfaceLogin,
     setFlights,
     isOpenChooseHangVe,
     isShowOptionSetting_LoginSuccess,
     isFlights,
-    handleChooseOpenHangVe_,
-    select1Value,
-    select2Value,
-    ngayDi,
   } = useContext(CONTEXT);
 
   //!new
   const locatSearchForChuyenBay = useLocation();
-  const { dtSelect1Value, dtSelect2Value, dtNgayDi } =
-    locatSearchForChuyenBay.state;
 
   //chọn giờ
   const [clickedIndex, setClickedIndex] = useState(null);
@@ -607,6 +600,9 @@ export const XemDanhSachChuyenBay = () => {
   );
 };
 function ShowFlight({ flights }) {
+  let dtSelect1Value = localStorage.getItem("dtSelect1Value");
+  let dtSelect2Value = localStorage.getItem("dtSelect2Value");
+
   const { handleChooseOpenHangVe } = useContext(CONTEXT);
   const itemRefs = useRef([]);
   const [expandedIndex, setExpandedIndex] = useState(null);
@@ -619,9 +615,7 @@ function ShowFlight({ flights }) {
   );
   const { select1Value, select2Value } = useContext(CONTEXT);
   //!new
-  const locatSearchForChuyenBay = useLocation();
-  const { dtSelect1Value, dtSelect2Value, dtNgayDi } =
-    locatSearchForChuyenBay.state;
+
   return (
     <div className="flex flex-col h-fit w-full mt-[2%]">
       {flights

@@ -12,7 +12,7 @@ export default function AdminHome() {
     <>
       <div className="fixed top-0 bg-slate-200 w-full h-screen flex flex-col items-center">
         <Header />
-        <div className=" flex flex-col w-[230px] sm:w-[600px] md:w-[800px] h-[20%] justify-center items-center absolute top-[50%] sm:top-[30%] font-medium sm:text-lg text-xs">
+        <div className=" flex flex-row w-[230px] sm:w-[600px] md:w-[800px] h-[20%] justify-center items-center absolute top-[50%] sm:top-[30%] font-medium sm:text-lg text-xs">
           <div className="flex justify-between w-full h-full text-white line-clamp-1">
             <Link
               to="/QuanLyDanhSachTaiKhoan"

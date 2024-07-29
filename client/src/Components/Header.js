@@ -52,7 +52,7 @@ function Header() {
     <div
       className={`sticky top-0  z-20 flex w-full justify-between border-b-[0.5px] border-gray-600 ${isBg_Header} p-5 text-[20px]`}
     >
-      <Link to="/CNPM_Travel">
+      <Link to="/">
         <img
           alt=""
           src={

@@ -82,12 +82,12 @@ export function Login() {
     };
   }, []);
   return (
-    <div className="fixed z-50 flex h-full w-full items-center justify-center bg-white/10 backdrop-brightness-75">
+    <div className="fixed z-50 flex h-full w-full items-center justify-center bg-white/10 backdrop-brightness-75 ">
       <div
         onClick={handleShowInterfaceLogin}
         className="absolute z-20 w-full h-full"
       ></div>
-      <div className="absolute z-40 m-auto h-fit w-[450px] rounded-lg bg-white p-4">
+      <div className="absolute z-40 lg:m-auto h-fit lg:w-[450px] rounded-lg bg-white p-4 w-[250px]">
         <div className="div-flex-adjust-justify-between flex h-14 w-full">
           <p className="w-[90%] text-2xl font-bold"> Đăng nhập</p>
           <div className="w-[10%]" onClick={handleShowInterfaceLogin}>
