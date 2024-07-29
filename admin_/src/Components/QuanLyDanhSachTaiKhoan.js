@@ -12,7 +12,7 @@ const QuanLyDanhSachTaiKhoan = () => {
   const [accounts, setAccounts] = useState([]);
   const [selectedAccount, setSelectedAccount] = useState(null);
   const [isModalVisible, setIsModalVisible] = useState(false);
-  const [stateAccount, setStateAccount] = useState();
+  const [stateAccount, setStateAccount] = useState("");
   const [allAccount, setAllAccount] = useState([]);
 
   const handleViewDetails = (account) => {
@@ -68,20 +68,23 @@ const QuanLyDanhSachTaiKhoan = () => {
   };
 
   const searchAcc = async () => {
-    try {
-      const response = await fetch(
-        `https://vercel-travrel.vercel.app/api/get_user/find_id_user/${stateAccount}`
-      );
-      if (!response.ok) {
-        if (!stateAccount) setAccounts(allAccount);
-        else setAccounts([]);
-        throw new Error("Network response was not ok");
+    if (stateAccount === null) setAccounts(allAccount);
+    else if (stateAccount.trim().length <= 0) setAccounts(allAccount);
+    else {
+      try {
+        const response = await fetch(
+          `https://vercel-travrel.vercel.app/api/get_user/find_id_user/${stateAccount}`
+        );
+        if (!response.ok) {
+          setAccounts([]);
+          throw new Error("Network response was not ok");
+        }
+        const data = await response.json();
+        setAccounts([]);
+        setAccounts((f) => [...f, data]);
+      } catch (error) {
+        console.error("There was a problem with your fetch operation:", error);
       }
-      const data = await response.json();
-      setAccounts([]);
-      setAccounts((f) => [...f, data]);
-    } catch (error) {
-      console.error("There was a problem with your fetch operation:", error);
     }
   };
 
@@ -89,13 +92,15 @@ const QuanLyDanhSachTaiKhoan = () => {
     <div className="w-full">
       <Header />
       <div className="justify-center flex m-960">
-        <h1 className="font-bold text-2xl sm:text-xl">DANH SÁCH TÀI KHOẢN KHÁCH HÀNG</h1>
+        <h1 className="font-bold text-2xl sm:text-xl">
+          DANH SÁCH TÀI KHOẢN KHÁCH HÀNG
+        </h1>
       </div>
       <div className="p-2 w-11/12 m-auto flex">
         <input
           className=" lg:w-[750px] h-[40px] border rounded-md shadow-sm focus:outline-none border-gray-400 focus"
           type="text"
-          value={stateAccount}
+          defaultValue={stateAccount}
           placeholder="Tìm kiếm tài khoản theo mã"
           onChange={(e) => setStateAccount(e.target.value)}
         />

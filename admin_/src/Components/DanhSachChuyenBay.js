@@ -60,20 +60,24 @@ const DanhSachChuyenBay = () => {
   }, []);
 
   const searchFlight = async () => {
-    try {
-      const response = await fetch(
-        `https://vercel-travrel.vercel.app/api/get/flight/${stateChuyenBay}`
-      );
-      if (!response.ok) {
-        if (!stateChuyenBay) setListFlight(allFlight);
-        else setListFlight([]);
-        throw new Error("Network response was not ok");
+    if (stateChuyenBay === null) setListFlight(allFlight);
+    else if (stateChuyenBay.trim().length <= 0) setListFlight(allFlight);
+    else {
+      try {
+        const response = await fetch(
+          `https://vercel-travrel.vercel.app/api/get/flight/${stateChuyenBay}`
+        );
+        if (!response.ok) {
+          if (!stateChuyenBay) setListFlight(allFlight);
+          else setListFlight([]);
+          throw new Error("Network response was not ok");
+        }
+        const data = await response.json();
+        setListFlight([]);
+        setListFlight((f) => [...f, data]);
+      } catch (error) {
+        console.error("There was a problem with your fetch operation:", error);
       }
-      const data = await response.json();
-      setListFlight([]);
-      setListFlight((f) => [...f, data]);
-    } catch (error) {
-      console.error("There was a problem with your fetch operation:", error);
     }
   };
 

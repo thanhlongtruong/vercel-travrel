@@ -54,26 +54,24 @@ function QuanLyDonHang() {
 
   const [stateDon, setStateDon] = useState("");
   const searchDon = async () => {
-    try {
-      const response = await fetch(
-        `https://vercel-travrel.vercel.app/api/get_donhang/${stateDon}`
-      );
-      // if (!response.ok) {
-      //   throw new Error("Network response was not ok");
-      // }
-      // const data = await response.json();
-      // setDonHangs([]);
-      // setDonHangs((d) => [...d, data]);
-      if (!response.ok) {
-        if (!stateDon) setDonHangs(allDonHang);
-        else setDonHangs([]);
-        throw new Error("Network response was not ok");
+    if (stateDon === null) setDonHangs(allDonHang);
+    else if (stateDon.trim().length <= 0) setDonHangs(allDonHang);
+    else {
+      try {
+        const response = await fetch(
+          `https://vercel-travrel.vercel.app/api/get_donhang/${stateDon}`
+        );
+        if (!response.ok) {
+          if (!stateDon) setDonHangs(allDonHang);
+          else setDonHangs([]);
+          throw new Error("Network response was not ok");
+        }
+        const data = await response.json();
+        setDonHangs([]);
+        setDonHangs((d) => [...d, data]);
+      } catch (error) {
+        console.error("There was a problem with your fetch operation:", error);
       }
-      const data = await response.json();
-      setDonHangs([]);
-      setDonHangs((d) => [...d, data]);
-    } catch (error) {
-      console.error("There was a problem with your fetch operation:", error);
     }
   };
 
