@@ -11,7 +11,7 @@ function App() {
     <>
       <h1>Alooo</h1>
       <Routes>
-        <Route path="/CNPM_Travel" element={<Home />} />
+        <Route path="/" element={<Home />} />
         <Route path="/Setting/InfoAccount" element={<Setting />} />
         <Route path="/Setting/HistoryTicket" element={<Setting />} />
         <Route
