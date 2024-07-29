@@ -70,7 +70,8 @@ function TrangThanhToan() {
               idUser + " order " + dataTicket.length + " ticket of " + idDH,
             userID: idUser,
             orderID: idDH,
-            return_url: "http://localhost:3000/Setting/HistoryTicket",
+            return_url:
+              "https://vercel-travrel-home.vercel.app/XemDanhSachChuyenBay",
           }),
         }
       );
