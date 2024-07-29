@@ -65,7 +65,7 @@ function InterFaceLogin() {
     const fetchAccount = async () => {
       try {
         const response = await fetch(
-          `http://localhost:4001/api/get_user/find_number_phone/${isInput}`
+          `https://vercel-travrel.vercel.app/api/get_user/find_number_phone/${isInput}`
         );
         if (!response.ok) {
           throw new Error("Network response was not ok");
@@ -101,20 +101,23 @@ function InterFaceLogin() {
       password: password,
     };
     try {
-      const response = await fetch("http://localhost:4001/api/users/signup", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json", // Kiểu nội dung của request
-        },
-        body: JSON.stringify({
-          numberPhone: user.numberPhone,
-          fullName: user.fullName,
-          gender: user.gender,
-          birthday: user.birthday,
-          password: user.password,
-          status: "Đang hoạt động",
-        }),
-      });
+      const response = await fetch(
+        "https://vercel-travrel.vercel.app/api/users/signup",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json", // Kiểu nội dung của request
+          },
+          body: JSON.stringify({
+            numberPhone: user.numberPhone,
+            fullName: user.fullName,
+            gender: user.gender,
+            birthday: user.birthday,
+            password: user.password,
+            status: "Đang hoạt động",
+          }),
+        }
+      );
 
       if (!response.ok) {
         setShowNotiFailRegister(true);

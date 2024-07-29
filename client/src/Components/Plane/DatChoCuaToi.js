@@ -194,7 +194,7 @@ function DatChoCuaToi() {
   ) => {
     try {
       const req = fetch(
-        `http://localhost:4001/api/update/flight/${dataFlight._id}`,
+        `https://vercel-travrel.vercel.app/api/update/flight/${dataFlight._id}`,
         {
           method: "PATCH",
           headers: {
@@ -232,17 +232,20 @@ function DatChoCuaToi() {
   //! Tạo Oder and Ticket
   const handlCreateTicket = async () => {
     try {
-      const dhCreate = await fetch("http://localhost:4001/api/add_donhang", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          userId: dataUser._id,
-          soLuongVe: dataTicket.soLuongVe,
-          tongGia: 0,
-        }),
-      });
+      const dhCreate = await fetch(
+        "https://vercel-travrel.vercel.app/api/add_donhang",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            userId: dataUser._id,
+            soLuongVe: dataTicket.soLuongVe,
+            tongGia: 0,
+          }),
+        }
+      );
 
       const dhJS = await dhCreate.json();
 
@@ -259,7 +262,7 @@ function DatChoCuaToi() {
     try {
       for (let i = 0; i < dataTicket.soLuongVe; i++) {
         promises.push(
-          fetch("http://localhost:4001/api/add_ticket", {
+          fetch("https://vercel-travrel.vercel.app/api/add_ticket", {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
@@ -311,12 +314,15 @@ function DatChoCuaToi() {
 
   const handleDelDH = async (idDH) => {
     try {
-      const req = fetch(`http://localhost:4001/api/delete_donhang/${idDH}`, {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
+      const req = fetch(
+        `https://vercel-travrel.vercel.app/api/delete_donhang/${idDH}`,
+        {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
       if (!req.ok || !req) {
         throw new Error("Network response was not ok");
       }

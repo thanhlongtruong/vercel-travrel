@@ -39,7 +39,7 @@ export function InfoAccount() {
 
     try {
       const response = await fetch(
-        `http://localhost:4001/api/update_user/${id}`,
+        `https://vercel-travrel.vercel.app/api/update_user/${id}`,
         {
           method: "PATCH", // Phương thức HTTP
           headers: {
@@ -63,7 +63,7 @@ export function InfoAccount() {
       const data = await response.json();
       // setSubmitUpdate(!isSubmitUpdate);
       const fetchNewDataResponse = await fetch(
-        `http://localhost:4001/api/get_user/find_id_user/${id}`,
+        `https://vercel-travrel.vercel.app/api/get_user/find_id_user/${id}`,
         {
           method: "GET",
           headers: {

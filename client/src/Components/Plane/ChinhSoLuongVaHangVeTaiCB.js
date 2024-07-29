@@ -28,7 +28,7 @@ export default function ChinhSoLuongVaHangVeTaiCB() {
     const getFlight = async () => {
       try {
         const res = await fetch(
-          `http://localhost:4001/api/get/flight/${getId_Flight}`
+          `https://vercel-travrel.vercel.app/api/get/flight/${getId_Flight}`
         );
 
         if (!res.ok) {

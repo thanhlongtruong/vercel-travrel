@@ -69,7 +69,7 @@ function HistoryDon({ id, dtChuyenBays }) {
     const fetchDonHang = async () => {
       try {
         const response = await fetch(
-          `http://localhost:4001/api/get/all_donhang`
+          `https://vercel-travrel.vercel.app/api/get/all_donhang`
         );
         if (!response.ok) {
           throw new Error("Network response was not ok");
@@ -88,7 +88,7 @@ function HistoryDon({ id, dtChuyenBays }) {
     const fetchVe = async () => {
       try {
         const response = await fetch(
-          `http://localhost:4001/api/get_all_tickets`
+          `https://vercel-travrel.vercel.app/api/get_all_tickets`
         );
         if (!response.ok) {
           throw new Error("Network response was not ok");
@@ -122,9 +122,7 @@ function HistoryDon({ id, dtChuyenBays }) {
               <div className="font-semibold line-clamp-1">
                 Đơn hàng {index + 1}
               </div>
-              <div className="">
-                {converDateToVNDate(donhang.createdAt)}
-              </div>
+              <div className="">{converDateToVNDate(donhang.createdAt)}</div>
             </div>
             <div className="flex justify-between">
               <div>
@@ -182,7 +180,7 @@ function HistoryVe({ ves, dtChuyenBays, donhang }) {
   const huy = async (ve) => {
     try {
       const response = await fetch(
-        `http://localhost:4001/api/update_ticket/${ve._id}`,
+        `https://vercel-travrel.vercel.app/api/update_ticket/${ve._id}`,
         {
           method: "PATCH", // Phương thức HTTP
           headers: {
@@ -204,7 +202,7 @@ function HistoryVe({ ves, dtChuyenBays, donhang }) {
     let newTongGia = donhang.tongGia - ve.giaVe;
     try {
       const response = await fetch(
-        `http://localhost:4001/api/update_donhang/${ve.maDon}`,
+        `https://vercel-travrel.vercel.app/api/update_donhang/${ve.maDon}`,
         {
           method: "PATCH", // Phương thức HTTP
           headers: {
@@ -232,7 +230,7 @@ function HistoryVe({ ves, dtChuyenBays, donhang }) {
       if (ve.hangVe === "Vé thường") {
         let soGhe = cb.soGheThuong + 1;
         const response = await fetch(
-          `http://localhost:4001/api/update/flight/${ve.chuyenBayId}`,
+          `https://vercel-travrel.vercel.app/api/update/flight/${ve.chuyenBayId}`,
           {
             method: "PATCH", // Phương thức HTTP
             headers: {
@@ -250,7 +248,7 @@ function HistoryVe({ ves, dtChuyenBays, donhang }) {
       } else if (ve.hangVe === "Vé thương gia") {
         let soGhe = cb.soGheThuongGia + 1;
         const response = await fetch(
-          `http://localhost:4001/api/update/flight/${ve.chuyenBayId}`,
+          `https://vercel-travrel.vercel.app/api/update/flight/${ve.chuyenBayId}`,
           {
             method: "PATCH", // Phương thức HTTP
             headers: {
@@ -382,7 +380,7 @@ function SuaVe({ ve, dtChuyenBays, donhang }) {
             : chuyenBay.giaVeGoc * 1.3;
         try {
           const response = await fetch(
-            `http://localhost:4001/api/update_ticket/${ve._id}`,
+            `https://vercel-travrel.vercel.app/api/update_ticket/${ve._id}`,
             {
               method: "PATCH", // Phương thức HTTP
               headers: {
@@ -409,7 +407,7 @@ function SuaVe({ ve, dtChuyenBays, donhang }) {
               let soGhe1 = chuyenBay.soGheThuong - 1;
               let soGhe2 = chuyenBay.soGheThuongGia + 1;
               const response = await fetch(
-                `http://localhost:4001/api/update/flight/${ve.chuyenBayId}`,
+                `https://vercel-travrel.vercel.app/api/update/flight/${ve.chuyenBayId}`,
                 {
                   method: "PATCH", // Phương thức HTTP
                   headers: {
@@ -430,7 +428,7 @@ function SuaVe({ ve, dtChuyenBays, donhang }) {
               let soGhe1 = chuyenBay.soGheThuong + 1;
               let soGhe2 = chuyenBay.soGheThuongGia - 1;
               const response = await fetch(
-                `http://localhost:4001/api/update/flight/${ve.chuyenBayId}`,
+                `https://vercel-travrel.vercel.app/api/update/flight/${ve.chuyenBayId}`,
                 {
                   method: "PATCH", // Phương thức HTTP
                   headers: {
@@ -459,7 +457,7 @@ function SuaVe({ ve, dtChuyenBays, donhang }) {
           if (donhang.tongGia !== newDonGia) {
             try {
               const response = await fetch(
-                `http://localhost:4001/api/update_donhang/${ve.maDon}`,
+                `https://vercel-travrel.vercel.app/api/update_donhang/${ve.maDon}`,
                 {
                   method: "PATCH", // Phương thức HTTP
                   headers: {

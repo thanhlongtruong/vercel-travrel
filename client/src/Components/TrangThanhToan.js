@@ -33,7 +33,7 @@ function TrangThanhToan() {
   const handlUpdateDH = async (sum) => {
     try {
       const req = fetch(
-        `http://localhost:4001/api/update_donhang/${dataTicket[0].maDon}`,
+        `https://vercel-travrel.vercel.app/api/update_donhang/${dataTicket[0].maDon}`,
         {
           method: "PATCH", // Phương thức HTTP
           headers: {

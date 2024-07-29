@@ -70,7 +70,7 @@ const QuanLyDanhSachTaiKhoan = () => {
   const searchAcc = async () => {
     try {
       const response = await fetch(
-        `http://localhost:4001/api/get_user/find_id_user/${stateAccount}`
+        `https://vercel-travrel.vercel.app/api/get_user/find_id_user/${stateAccount}`
       );
       if (!response.ok) {
         if (!stateAccount) setAccounts(allAccount);
