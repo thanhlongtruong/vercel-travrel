@@ -10,7 +10,7 @@ function App() {
   return (
     <>
       <h1>Alooo</h1>
-      <Routes>
+      {/* <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/Setting/InfoAccount" element={<Setting />} />
         <Route path="/Setting/HistoryTicket" element={<Setting />} />
@@ -26,7 +26,7 @@ function App() {
           path="/XemDanhSachChuyenbBay/DatChoCuaToi/ThanhToan"
           element={<TrangThanhToan />}
         />
-      </Routes>
+      </Routes> */}
     </>
   );
 }
