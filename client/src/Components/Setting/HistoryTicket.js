@@ -377,7 +377,7 @@ function SuaVe({ ve, dtChuyenBays, donhang }) {
         let newGiaVe =
           hangVe === "Vé thường"
             ? chuyenBay.giaVeGoc
-            : chuyenBay.giaVeGoc * 1.3;
+            : chuyenBay.giaVeGoc * 0.13;
         try {
           const response = await fetch(
             `https://vercel-travrel.vercel.app/api/update_ticket/${ve._id}`,
@@ -487,12 +487,12 @@ function SuaVe({ ve, dtChuyenBays, donhang }) {
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
-      <div className="justify-center bg-white p-6 rounded-lg w-1/2 flex-col-reverse">
+      <div className="justify-center bg-white p-6 rounded-lg md:w-1/2 w-11/12 flex-col-reverse">
         <h2 className="text-center text-xl font-bold mb-4 text-blue-600">
           SỬA SỐ HÀNH LÝ hoặc NÂNG HẠNG
         </h2>
-        <div className="flex gap-[120px] w-[100%]">
-          <div className="flex-col w-50%">
+        <div className="flex justify-evenly w-[100%]">
+          <div className="flex-col w-50% overflow-wrap break-all">
             <p className="p-2">
               <strong>Tên hàng khách: </strong> {ve.Ten}
             </p>
@@ -529,7 +529,7 @@ function SuaVe({ ve, dtChuyenBays, donhang }) {
               </div>
             </p>
           </div>
-          <div className="flex-col w-[50%]">
+          <div className="flex-col w-[50%] overflow-wrap break-all">
             <p className="p-2">
               <strong>Số điện thoại: </strong> {ve.phoneNumber}
             </p>
@@ -540,7 +540,7 @@ function SuaVe({ ve, dtChuyenBays, donhang }) {
               <strong>Số hành lý: </strong>
               <input
                 type="number"
-                className="border-2 p-1"
+                className="border-2 p-1 w-full"
                 defaultValue={soKy}
                 onChange={(e) => setSoKy(e.target.value)}
               />

@@ -104,7 +104,7 @@ const SuaThongTinChuyenBay = ({ isVisible, onClose, flight }) => {
       diemDen: isDiemDen,
       giaVeGoc: isGiaChuyen,
       soGheThuong: isSoLuongVeThuongConLai,
-      soGheThuongGia: isSoLuongVeThuongConLai,
+      soGheThuongGia: isSoLuongVeThuongGiaConLai,
       khoiLuongQuyDinhTrenMotVe: isSoHanhLy,
     };
 

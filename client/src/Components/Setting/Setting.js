@@ -46,7 +46,7 @@ function Setting() {
       {/* {isShowOptionSetting_LoginSuccess && <LoginSuccess />} */}
 
       <div className="p-5 w-full h-fit bg-slate-100">
-        <div className="w-[80%] h-fit flex gap-x-8  m-auto">
+        <div className="w-[80%] h-fit flex lg:gap-x-8 gap-x-3 m-auto">
           <div className="w-0 h-0 lg:w-[30%] lg:h-80 rounded-lg border bg-white">
             {!hideOptionSetting && <OptionSetting />}
           </div>

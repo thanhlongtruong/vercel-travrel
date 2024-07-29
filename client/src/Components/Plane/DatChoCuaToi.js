@@ -1,19 +1,23 @@
-import React, { useState, useEffect, useRef, useCallback, memo } from "react";
+import React, { useState, useEffect, memo, useContext } from "react";
 import Header from "../Header";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import {
   NotiFailEventlogin,
   CHUA_DIEN_THONGTIN_VE,
+  QUA_SO_LUONG_VE,
 } from "../Noti/NotiFailEventLogin";
 import InfoTicket from "./InfoTicket";
+import { CONTEXT } from "../../Context/WindowLogin";
 
 function DatChoCuaToi() {
   const dataTicketLocation = useLocation();
-  const { dataTicket, dataFlight, dataUser } = dataTicketLocation.state;
-  if (dataUser === null) {
-    window.location.href = "/XemDanhSachChuyenBay";
+  const { userObj } = useContext(CONTEXT);
+  if (dataTicketLocation === null || !dataTicketLocation.state || !userObj) {
+    window.location.href =
+      "https://vercel-travrel-home.vercel.app/XemDanhSachChuyenBay";
   }
-
+  const location = useLocation();
+  const { dataTicket, dataFlight, dataUser } = dataTicketLocation.state;
   const naviTicket = useNavigate();
 
   //!handle device
@@ -144,6 +148,8 @@ function DatChoCuaToi() {
       return updated;
     });
   };
+  const [qunatityVeThuong, setQunatityVeThuong] = useState(0);
+  const [qunatityVeThuongGia, setQunatityVeThuongGia] = useState(0);
 
   //! Giá vé
   const handlGetGia = (type, index) => {
@@ -157,16 +163,23 @@ function DatChoCuaToi() {
     if (type === "Vé thương gia") {
       setGiaVe((prev) => {
         const gia = [...prev];
-        gia[index] = Number((dataFlight.giaVeGoc * 1.3).toFixed(3));
+        gia[index] = Number(
+          (dataFlight.giaVeGoc + dataFlight.giaVeGoc * 0.13).toFixed(3)
+        );
         return gia;
       });
     }
   };
 
+  const [isNotiQuaTicket, setNotiQuaTicket] = useState(false);
+  // const [idDH, setIdDH] = useState(null);
+  const [idTickets, setTickets] = useState([null]);
+
+  let check = false;
   const sumQuantityKindTicket = async (data) => {
     let quantityTicketThuong = 0;
     let quantityTicketThuongGia = 0;
-    console.log(data);
+
     try {
       for (let i = 0; i < dataTicket.soLuongVe; i++) {
         if (data[i].hangVe === "Vé thường") {
@@ -176,6 +189,18 @@ function DatChoCuaToi() {
         }
       }
       console.log(quantityTicketThuong, quantityTicketThuongGia);
+      if (quantityTicketThuong > dataFlight.soGheThuong) {
+        await setNotiQuaTicket(true);
+        check = true;
+
+        await setShowWarm(false);
+      }
+      if (quantityTicketThuongGia > dataFlight.soGheThuongGia) {
+        await setNotiQuaTicket(true);
+        check = true;
+
+        await setShowWarm(false);
+      }
     } catch (err) {
       throw new Error("Bug when tính quantity ticket");
     }
@@ -186,6 +211,13 @@ function DatChoCuaToi() {
     );
     //  setQunatityVeThuong(quantityTicketThuong);
     //  setQunatityVeThuongGia(quantityTicketThuongGia);
+  };
+  useEffect(() => {}, [location]);
+  const handleAgain = async () => {
+    console.log(idTickets);
+
+    check = false;
+    await setNotiQuaTicket(false);
   };
 
   const handleUpdateQuantityTicketFlight = async (
@@ -201,20 +233,12 @@ function DatChoCuaToi() {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            timeDi: dataFlight.timeDi,
-            dateDi: dataFlight.dateDi,
-            timeDen: dataFlight.timeDen,
-            dateDen: dataFlight.dateDen,
-            diemDi: dataFlight.diemDi,
-            diemDen: dataFlight.diemDen,
-            giaVeGoc: dataFlight.giaVeGoc,
             soGheThuong: Math.ceil(
               dataFlight.soGheThuong - quantityTicketThuong
             ),
             soGheThuongGia: Math.ceil(
               dataFlight.soGheThuongGia - quantityTicketThuongGia
             ),
-            khoiLuongQuyDinhTrenMotVe: dataFlight.khoiLuongQuyDinhTrenMotVe,
           }),
         }
       );
@@ -226,9 +250,6 @@ function DatChoCuaToi() {
     }
   };
 
-  // useEffect(() => {
-  //   console.log(isGetSoKy);
-  // }, [isGetSoKy]);
   //! Tạo Oder and Ticket
   const handlCreateTicket = async () => {
     try {
@@ -250,8 +271,8 @@ function DatChoCuaToi() {
       const dhJS = await dhCreate.json();
 
       const dhId = dhJS._id;
-
-      await handleResTicket(dhId);
+      // await setIdDH(dhId);
+      await await handleResTicket(dhId);
     } catch (error) {
       console.error("Bug when creating order:", error);
     }
@@ -289,19 +310,58 @@ function DatChoCuaToi() {
         // }
         throw new Error("Network response was not ok");
       }
+      await setTickets(data);
       await sumQuantityKindTicket(data);
-      console.log("aaaaaaaaaaa");
-      naviTicket("/XemDanhSachChuyenbBay/DatChoCuaToi/ThanhToan", {
-        state: {
-          dataTicket: data,
-          dataFlight: dataFlight,
-          idDH: dhId,
-          idUser: dataUser._id,
-        },
-      });
+      console.log(check, "c");
+      if (check) {
+        try {
+          for (let i = 0; i < dataTicket.soLuongVe; i++) {
+            const deleteTicket = await fetch(
+              `https://vercel-travrel.vercel.app/api/delete_ticket/${data[i]._id}`,
+              {
+                method: "DELETE",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+              }
+            );
+            if (!deleteTicket.ok || !deleteTicket) {
+              throw new Error("Network response was not ok");
+            }
+          }
+          await handleDelDH(data[0].maDon);
+          const req = await fetch(
+            `https://vercel-travrel.vercel.app/api/update/flight/${data[0].chuyenBayId}`,
+            {
+              method: "PATCH",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                soGheThuong: dataFlight.soGheThuong,
+                soGheThuongGia: dataFlight.soGheThuongGia,
+              }),
+            }
+          );
+          if (!req.ok || !req) {
+            throw new Error("Network response was not ok");
+          }
+        } catch (err) {
+          console.error("Bug when xoa ve and xoa don hang");
+        }
+      }
+      if (!check) {
+        naviTicket("/XemDanhSachChuyenbBay/DatChoCuaToi/ThanhToan", {
+          state: {
+            dataTicket: data,
+            dataFlight: dataFlight,
+            idDH: dhId,
+            idUser: dataUser._id,
+          },
+        });
+      }
     } catch (error) {
       if (dhId) {
-        console.log("bbbbbbbbbb");
         setShowWarm(false);
         await handleDelDH(dhId);
       }
@@ -330,9 +390,6 @@ function DatChoCuaToi() {
       console.error("Bug when delete don hang:", error);
     }
   };
-
-  const [qunatityVeThuong, setQunatityVeThuong] = useState(0);
-  const [qunatityVeThuongGia, setQunatityVeThuongGia] = useState(1);
 
   return (
     <>
@@ -524,6 +581,18 @@ function DatChoCuaToi() {
           <div className="fixed h-fit top-[50%] left-[50%] transform -translate-x-1/2 -translate-y-1/2 w-full">
             {!isCheck && <NotiFailEventlogin content={CHUA_DIEN_THONGTIN_VE} />}
           </div>
+          {isNotiQuaTicket && (
+            <div className="fixed h-fit top-[50%] flex justify-center left-[50%] transform -translate-x-1/2 -translate-y-1/2 w-full">
+              <button
+                className="bg-[#0194f3] w-fit p-4  text-base text-white font-semibold rounded-lg"
+                onClick={handleAgain}
+              >
+                Hiểu rồi
+              </button>
+
+              <NotiFailEventlogin content={QUA_SO_LUONG_VE} />
+            </div>
+          )}
 
           <button
             type="button"
@@ -649,6 +718,7 @@ function FCChooseHangVe({ dataFlight, index, handlGetHangVe, handlGetGia }) {
   const [isClicked, setIsClicked] = useState(null);
 
   useEffect(() => {}, [isClicked]);
+
   const handleButtonClick = (type) => {
     if (type === "Vé thường") {
       handlGetHangVe(type, index);
@@ -684,15 +754,17 @@ function FCChooseHangVe({ dataFlight, index, handlGetHangVe, handlGetGia }) {
               />
             </svg>
           </div>
-          <div className="absolute left-1/2 transform text-wrap -translate-x-1/2 bottom-full mb-2 w-[300px] p-2 text-sm text-white bg-gray-700 rounded transition-opacity duration-300 opacity-0 hover-note">
+          <div className="absolute left-1/2 transform text-wrap -translate-x-1/2 bottom-full mb-2 w-[300px] p-2 text-sm text-white bg-gray-700 rounded transition-opacity overflow-hidden duration-300 opacity-0 h-0 hover-note">
             Có 2 loại vé: <br /> - Vé thường <br /> - Vé thương gia = Vé thường
-            * 13%
+            * 13% <br /> Số vé thường còn lại : {dataFlight.soGheThuong} <br />{" "}
+            Số vé thương gia còn lại : {dataFlight.soGheThuongGia}
             <div className="absolute left-1/2 transform -translate-x-1/2 bottom-[-8px] w-0 h-0 border-l-8 border-l-transparent border-r-8 border-r-transparent border-t-8 border-t-gray-700"></div>
           </div>
         </div>
 
         <style jsx>{`
           .icon-hover-trigger:hover + .hover-note {
+            height: auto;
             opacity: 1;
           }
         `}</style>
@@ -734,7 +806,7 @@ function FCChooseHangVe({ dataFlight, index, handlGetHangVe, handlGetGia }) {
               Vé thương gia
             </span>
             <span className="text-lg font-semibold text-[#FF5E1F]">
-              {(dataFlight.giaVeGoc * 1.3).toFixed(3)}
+              {(dataFlight.giaVeGoc + dataFlight.giaVeGoc * 0.13).toFixed(3)}
               <span className="text-sm font-semibold text-[#a0a0a0]">
                 /khách
               </span>
