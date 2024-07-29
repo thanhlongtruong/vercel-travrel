@@ -23,7 +23,7 @@ app.use(RouterFlight);
 
 // Xử lý các yêu cầu khác
 app.use("/", (req, res) => {
-  res.send("Hello World 1!");
+  res.send("Hello World 2!");
 });
 
 const start = async () => {
