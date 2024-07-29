@@ -9,7 +9,7 @@ const ChiTietTaiKhoan = ({ isVisible, onClose, account }) => {
   if (!isVisible) return null;
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
-      <div className="justify-center bg-white p-6 rounded-lg w-1/2">
+      <div className="justify-center bg-white p-6 rounded-lg sm:w-1/2 w-11/12 max-h-full overflow-y-scroll">
         <h2 className=" text-center text-xl font-bold mb-4">
           CHI TIẾT TÀI KHOẢN
         </h2>

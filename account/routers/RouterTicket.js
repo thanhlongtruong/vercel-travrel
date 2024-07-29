@@ -38,6 +38,21 @@ router.post("/api/post_status_donhang", async (req, res) => {
 
   try {
     res.status(200).json({ message: req.body });
+    const fetchDH = await fetch(
+      `https://vercel-travrel.vercel.app/api/update_donhang/${maDon}`,
+      {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          trangThai: "Thanh toán thanh công",
+        }),
+      }
+    );
+    if (!fetchDH.ok) {
+      throw new Error("Not change status don hang", maDon);
+    }
   } catch (err) {
     res.status(400).json({ message: err.message });
   }

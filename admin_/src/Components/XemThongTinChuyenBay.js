@@ -9,12 +9,12 @@ const XemThongTinChuyenBay = ({ isVisible, onClose, flight }) => {
   if (!isVisible) return null;
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
-      <div className="justify-center bg-white p-6 rounded-lg lg:w-1/2 flex-col">
+      <div className="justify-center bg-white p-6 rounded-lg lg:w-1/2 md:w-4/5 flex-col w-full max-h-full overflow-y-scroll">
         <h2 className="text-center text-xl font-bold mb-4 text-blue-600">
           THÔNG TIN CHUYẾN BAY
         </h2>
-        <div className="flex gap-[110px] w-[100%]">
-          <div className="flex-col w-50%">
+        <div className="flex justify-evenly w-full">
+          <div className="flex-col w-[50%] overflow-wrap break-all">
             <p className="p-2">
               <strong>Mã chuyến bay: </strong> {flight._id}
             </p>
@@ -31,7 +31,8 @@ const XemThongTinChuyenBay = ({ isVisible, onClose, flight }) => {
               <strong>Số lượng vé thường còn lại: </strong> {flight.soGheThuong}
             </p>
             <p className="p-2">
-              <strong>Số lượng vé thương gia còn lại: </strong> {flight.soGheThuongGia}
+              <strong>Số lượng vé thương gia còn lại: </strong>{" "}
+              {flight.soGheThuongGia}
             </p>
           </div>
           <div className="flex-col w-[50%]">
@@ -52,14 +53,13 @@ const XemThongTinChuyenBay = ({ isVisible, onClose, flight }) => {
               {flight.khoiLuongQuyDinhTrenMotVe}
             </p>
             <button
-          onClick={onClose}
-          className="mt-4 bg-red-500 text-white px-4 py-2 rounded font-medium self-baseline"
-        >
-          Đóng
-        </button>
+              onClick={onClose}
+              className="mt-4 bg-red-500 text-white px-4 py-2 rounded font-medium self-baseline"
+            >
+              Đóng
+            </button>
           </div>
         </div>
-        
       </div>
     </div>
   );

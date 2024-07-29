@@ -134,12 +134,12 @@ const SuaThongTinChuyenBay = ({ isVisible, onClose, flight }) => {
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
-      <div className="justify-center bg-white p-6 rounded-lg w-1/2 flex-col">
+      <div className="justify-center bg-white p-6 rounded-lg lg:w-1/2 md:w-4/5 flex-col w-full max-h-full overflow-y-scroll">
         <h2 className="text-center text-xl font-bold mb-4 text-blue-600">
           SỬA THÔNG TIN CHUYẾN BAY
         </h2>
-        <div className="flex gap-10 w-full">
-          <div className="flex-col w-1/2">
+        <div className="flex justify-evenly w-full">
+          <div className="flex-col w-1/2 overflow-wrap break-all">
             <p className="p-2">
               <strong>Mã chuyến bay: </strong> {flight._id}
             </p>
@@ -221,7 +221,7 @@ const SuaThongTinChuyenBay = ({ isVisible, onClose, flight }) => {
                 name="GiaChuyen"
                 value={isGiaChuyen}
                 onChange={(e) => setIsGiaChuyen(e.target.value)}
-                className="border rounded p-1 w-full"
+                className="border rounded p-1 w-full sm:w[2/4]"
               />
             </p>
             {errors.giaChuyen && (
@@ -288,7 +288,7 @@ const SuaThongTinChuyenBay = ({ isVisible, onClose, flight }) => {
                 *{errors.soHanhLy}
               </p>
             )}
-            <div className="flex justify-end mt-4">
+            <div className="flex justify-end mt-4 flex-col sm:flex-row">
               <button
                 onClick={onClose}
                 className="bg-gray-500 text-white px-4 py-2 rounded font-medium mr-2"

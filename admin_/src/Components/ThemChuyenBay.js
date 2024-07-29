@@ -127,13 +127,13 @@ const ThemChuyenBay = ({ isVisible, onClose }) => {
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
-      <div className="bg-white p-6 rounded-lg w-1/2 flex-col">
+      <div className="bg-white p-6 rounded-lg lg:w-1/2 md:w-4/5 flex-col w-full max-h-full overflow-y-scroll">
         <h2 className="text-center text-xl font-bold mb-4 text-blue-600">
           THÊM CHUYẾN BAY
         </h2>
 
-        <div className="flex gap-10 w-full">
-          <div className="flex-col w-1/2">
+        <div className="flex justify-evenly w-full">
+          <div className="flex-col w-1/2 overflow-wrap break-all">
             <p className="p-2">
               <strong>Điểm đi: </strong>
               <input

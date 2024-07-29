@@ -90,7 +90,7 @@ const DanhSachChuyenBay = () => {
       <Header />
       <div className="justify-center flex m-960 ">
         <h1 className="font-bold lg:text-2xl text-blue-600 absolute lg:left-1/2 transform -translate-x-1/2 md:text-xl sm:text-sm left-1/3  ">
-          DANH SÁCH CHUYẾN BAY TRONG HỆ THỐNG
+          DANH SÁCH CHUYẾN BAY
         </h1>
         <button
           type="button"
