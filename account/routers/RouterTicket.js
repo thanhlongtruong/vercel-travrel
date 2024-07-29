@@ -33,45 +33,6 @@ router.post("/api/add_ticket", async (req, res) => {
     res.status(400).json({ message: err.message });
   }
 });
-router.post("/api/post_status_donhang", async (req, res) => {
-  const { maDon, trangThaiVe } = req.body;
-
-  try {
-    res.status(200).json({ message: req.body });
-    const fetchDH = await fetch(
-      `https://vercel-travrel.vercel.app/api/update_donhang/${maDon}`,
-      {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          trangThai: "Thanh toán thanh công",
-        }),
-      }
-    );
-    if (!fetchDH.ok) {
-      throw new Error("Not change status don hang", maDon);
-    }
-    const data = await fetchDH.json();
-    console.log("Cập nhật trạng thái đơn hàng thành công:", data);
-  } catch (err) {
-    res.status(400).json({ message: err.message });
-  }
-});
-// router.get("/api/get_status_donhang", async (req, res) => {
-//   const { maDon, trangThaiVe } = req.params;
-
-//   try {
-//     const ticket = await Ticket.create({
-//       maDon,
-//       trangThaiVe,
-//     });
-//     res.status(200).json(ticket);
-//   } catch (err) {
-//     res.status(400).json({ message: err.message });
-//   }
-// });
 
 // router get all ticket
 router.get("/api/get_all_tickets", async (req, res) => {

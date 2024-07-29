@@ -20,7 +20,8 @@ router.post("/api/add_donhang", async (req, res) => {
     res.status(400).json({ message: err.message });
   }
 });
-// router add donhang
+
+// router update state donhang
 router.post("/api/update-status-donhang", async (req, res) => {
   const { status, orderID } = req.body;
 
@@ -35,6 +36,7 @@ router.post("/api/update-status-donhang", async (req, res) => {
     res.status(400).json({ message: err.message });
   }
 });
+
 // router find id donhang
 router.get("/api/get_donhang/:_id", async (req, res) => {
   const { _id } = req.params;
