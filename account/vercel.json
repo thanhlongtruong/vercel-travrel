@@ -1,10 +1,31 @@
 {
   "version": 2,
-  "builds": [{ "src": "./server.js", "use": "@vercel/node" }],
+  "builds": [
+    {
+      "src": "server.js",
+      "use": "@vercel/node"
+    }
+  ],
   "routes": [
     {
+      "src": "/api/.*",
+      "dest": "/routers/Account.js"
+    },
+    {
+      "src": "/api/.*",
+      "dest": "/routers/RouterDH.js"
+    },
+    {
+      "src": "/api/.*",
+      "dest": "/routers/RouterFlight.js"
+    },
+    {
+      "src": "/api/.*",
+      "dest": "/routers/RouterTicket.js"
+    },
+    {
       "src": "/(.*)",
-      "dest": "./server.js"
+      "dest": "/server.js"
     }
   ]
 }
