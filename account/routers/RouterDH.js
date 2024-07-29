@@ -20,7 +20,21 @@ router.post("/api/add_donhang", async (req, res) => {
     res.status(400).json({ message: err.message });
   }
 });
+// router add donhang
+router.post("/api/update-status-donhang", async (req, res) => {
+  const { status, orderID } = req.body;
 
+  try {
+    if (status === "completed") {
+      const data = await DonHang.findByIdAndUpdate(orderID, {
+        trangThai: "Đã thanh toán",
+      });
+      res.status(200).json(data);
+    }
+  } catch (err) {
+    res.status(400).json({ message: err.message });
+  }
+});
 // router find id donhang
 router.get("/api/get_donhang/:_id", async (req, res) => {
   const { _id } = req.params;

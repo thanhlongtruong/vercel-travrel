@@ -22,7 +22,7 @@ function Footer() {
   return (
     <div className="w-screen">
       <div className="flex w-full bg-[rgba(28,41,48,1.00)] px-5 pb-[55px] pt-[55px]">
-        <div className="flex w-full lg:items-start justify-center">
+        <div className="flex w-full lg:items-start justify-center sm:flex-row">
           {!isSizeLap && (
             <>
               <div className="ml-20 mt-[-20px] flex flex-col items-start justify-center w-[30%]">

@@ -205,9 +205,9 @@ function Home() {
           </div>
           {/* ngày */}
           <div className="w-[80%] lg:w-[42%] flex flex-row">
-            <div className="w-[50%]">
+            <div className="w-[100%]">
               <span className="text-white text-[20px]">Ngày đi</span>
-              <div className="flex flex-row justify-evenly items-center w-full rounded-l-2xl p-4 text-[25px] border-y-4 border-l-4 border-r-2 border-[#cdd0d1] bg-white">
+              <div className="flex flex-row justify-evenly items-center w-full rounded-2xl p-4 text-[25px] border-y-4 border-l-4 border-r-2 border-[#cdd0d1] bg-white">
                 <input
                   value={ngayDi}
                   type="date"
@@ -217,7 +217,7 @@ function Home() {
                 />
               </div>
             </div>
-            <div className="w-[50%]">
+            {/* <div className="w-[50%]">
               <div className="flex-row w-fit line-clamp-1">
                 <input
                   id="khu_hoi_check"
@@ -238,7 +238,7 @@ function Home() {
               >
                 <input type="date" className={`${isStateCheckbox}`} />
               </div>
-            </div>
+            </div> */}
           </div>
           {/* Tìm */}
           <div
