@@ -69,8 +69,8 @@ function TrangThanhToan() {
   };
 
   const handlePay = async () => {
-    setIsCountingDown(true);
-    setTime(30 * 60);
+    await setIsCountingDown(true);
+    await setTime(30 * 60);
     const data = {
       private_key:
         "pk_presspay_7914786efc32aa8635cad9b16b48a6e8f350e3856f39c4abc5bcc6f148536366",

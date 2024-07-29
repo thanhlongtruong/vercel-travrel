@@ -284,6 +284,13 @@ export const OrderProvider = ({ children }) => {
   useEffect(() => {
     let interval;
 
+    // Kiểm tra giá trị timeRemaining trong Local Storage
+    const storedTime = localStorage.getItem("timeRemaining");
+    if (storedTime !== null) {
+      setTime(parseInt(storedTime));
+      setIsCountingDown(true);
+    }
+
     if (isCountingDown && time > 0) {
       interval = setInterval(() => {
         setTime((prevTime) => {
@@ -299,6 +306,7 @@ export const OrderProvider = ({ children }) => {
       localStorage.removeItem("timeRemaining");
       handelDeleteDataBefor30p();
     }
+
     return () => {
       clearInterval(interval);
     };
