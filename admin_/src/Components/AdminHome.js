@@ -16,7 +16,7 @@ export default function AdminHome() {
           <div className="flex justify-between w-full h-full text-white line-clamp-1">
             <Link
               to="/QuanLyDanhSachTaiKhoan"
-              className="w-[30%] flex justify-evenly items-center text-center bg-slate-600 rounded-lg cursor-pointer p-1"
+              className="w-[30%] flex justify-evenly items-center text-center bg-slate-600 rounded-lg cursor-pointer p-1 sm:"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
