@@ -33,6 +33,32 @@ router.post("/api/add_ticket", async (req, res) => {
     res.status(400).json({ message: err.message });
   }
 });
+router.post("/api/post_status_donhang", async (req, res) => {
+  const { maDon, trangThaiVe } = req.body;
+
+  try {
+    const ticket = await Ticket.create({
+      maDon,
+      trangThaiVe,
+    });
+    res.status(200).json(ticket);
+  } catch (err) {
+    res.status(400).json({ message: err.message });
+  }
+});
+// router.get("/api/get_status_donhang", async (req, res) => {
+//   const { maDon, trangThaiVe } = req.params;
+
+//   try {
+//     const ticket = await Ticket.create({
+//       maDon,
+//       trangThaiVe,
+//     });
+//     res.status(200).json(ticket);
+//   } catch (err) {
+//     res.status(400).json({ message: err.message });
+//   }
+// });
 
 // router get all ticket
 router.get("/api/get_all_tickets", async (req, res) => {

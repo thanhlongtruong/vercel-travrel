@@ -98,7 +98,7 @@ const QuanLyDanhSachTaiKhoan = () => {
       </div>
       <div className="p-2 w-11/12 m-auto flex">
         <input
-          className=" lg:w-[750px] h-[40px] border rounded-md shadow-sm focus:outline-none border-gray-400 focus"
+          className=" w-1/2 sm:w-[600px] h-[40px] border rounded-md shadow-sm focus:outline-none border-gray-400 focus"
           type="text"
           defaultValue={stateAccount}
           placeholder="Tìm kiếm tài khoản theo mã"
@@ -106,13 +106,13 @@ const QuanLyDanhSachTaiKhoan = () => {
         />
         <button
           type="button"
-          className="bg-blue-500 lg:text-sm md:text-xs text-white font-medium rounded-md p-2 ml-3"
+          className="bg-blue-500 md:text-sm md:text-xs text-white font-medium rounded-md p-2 ml-3"
           onClick={searchAcc}
         >
           Tìm kiếm
         </button>
       </div>
-      <div className="flex w-full">
+      <div className="flex w-full overflow-x-scroll">
         <table className="w-11/12 m-auto bg-white border border-black">
           <thead>
             <tr className="border">

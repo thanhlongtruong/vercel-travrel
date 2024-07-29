@@ -13,8 +13,8 @@ const XemChiTietVeKH = ({ isVisible, onClose, ticket }) => {
         <h2 className="text-center text-xl font-bold mb-4 text-blue-600">
           CHI TIẾT VÉ
         </h2>
-        <div className="flex gap-[120px] w-[100%]">
-          <div className="flex-col w-50%">
+        <div className="flex xl:flex-row flex-col justify-evenly w-[100%] over">
+          <div className="flex-col w-50% overflow-wrap break-all">
             <p className="p-2">
               <strong>Mã vé: </strong> {ticket._id}
             </p>
@@ -31,7 +31,7 @@ const XemChiTietVeKH = ({ isVisible, onClose, ticket }) => {
               <strong>Giá vé: </strong> {ticket.giaVe} VND
             </p>
           </div>
-          <div className="flex-col w-[50%]">
+          <div className="flex-col w-[50%] overflow-wrap break-all">
             <p className="p-2">
               <strong>Mã chuyến bay: </strong> {ticket.chuyenBayId}
             </p>

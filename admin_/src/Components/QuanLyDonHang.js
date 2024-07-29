@@ -85,7 +85,7 @@ function QuanLyDonHang() {
       </div>
       <div className="py-2 w-11/12 m-auto flex">
         <input
-          className=" lg:w-[750px] h-[40px] px-2 border rounded-md shadow-sm focus:outline-none border-gray-400 focus"
+          className=" w-1/2 sm:w-[600px] h-[40px] px-2 border rounded-md shadow-sm focus:outline-none border-gray-400 focus"
           type="text"
           defaultValue={stateDon}
           placeholder="Tìm kiếm theo mã đơn"
@@ -99,7 +99,7 @@ function QuanLyDonHang() {
           Tìm kiếm
         </button>
       </div>
-      <div className="w-full flex-col mt-4">
+      <div className="w-full flex-col mt-4 overflow-x-scroll">
         <table className="lg:w-11/12 md:w-[600px] m-auto border-black bg-white">
           <thead>
             <tr className="border">

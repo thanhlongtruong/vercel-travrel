@@ -102,7 +102,7 @@ const DanhSachChuyenBay = () => {
       </div>
       <div className="p-2 w-11/12 m-auto flex">
         <input
-          className=" lg:w-[750px] h-[40px] border rounded-md shadow-sm focus:outline-none border-gray-400 focus"
+          className=" w-1/2 sm:w-[600px] h-[40px] border rounded-md shadow-sm focus:outline-none border-gray-400 focus"
           type="text"
           value={stateChuyenBay}
           placeholder="Tìm kiếm chuyến bay theo mã chuyến bay"
@@ -116,7 +116,7 @@ const DanhSachChuyenBay = () => {
           Tìm kiếm
         </button>
       </div>
-      <div className="max-w-screen flex mt-4 ">
+      <div className="max-w-screen flex mt-4 overflow-x-scroll">
         <table className="lg:w-11/12 m-auto border-black bg-white md:w-[600px]">
           <thead>
             <tr className="border">

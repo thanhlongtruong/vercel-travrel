@@ -35,7 +35,7 @@ function QuanLyVe() {
           DANH SÁCH QUẢN LÝ VÉ
         </h1>
       </div>
-      <div className="w-full flex mt-4">
+      <div className="w-full flex mt-4 overflow-x-scroll">
         <table className="w-11/12 m-auto border-black bg-white">
           <thead>
             <tr className="border">
