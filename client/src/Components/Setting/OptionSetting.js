@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState, useContext } from "react";
-import { Link, useNavigate } from "react-router-dom";
 import { CONTEXT } from "../../Context/WindowLogin";
 
 export function OptionSetting({ dtChuyenBays }) {
@@ -35,7 +34,7 @@ export function OptionSetting({ dtChuyenBays }) {
     } else {
       setTextBg("bg-white text-black");
     }
-  }, [place]);
+  }, [place, placeHome]);
   return (
     <>
       <p

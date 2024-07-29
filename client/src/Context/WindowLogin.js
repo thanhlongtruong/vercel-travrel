@@ -298,7 +298,7 @@ export const OrderProvider = ({ children }) => {
 
   const [isTimeShowNotiMake_a_Reservation, setTimeShowNotiMake_a_Reservation] =
     useState(false);
-  const [isTicket, setTicket] = useState();
+
   const navigate = useNavigate();
   const handleMake_a_Reservation = async ({ quantityTicket, flight }) => {
     if (!isUser) {
