@@ -9,12 +9,12 @@ const XemChiTietVeKH = ({ isVisible, onClose, ticket }) => {
   if (!isVisible) return null;
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
-      <div className="justify-center bg-white p-6 rounded-lg w-1/2 flex-col-reverse">
+      <div className="justify-center max-h-full overflow-y-scroll bg-white p-6 rounded-lg w-1/2 flex-col-reverse">
         <h2 className="text-center text-xl font-bold mb-4 text-blue-600">
           CHI TIẾT VÉ
         </h2>
-        <div className="flex xl:flex-row flex-col justify-evenly w-[100%] over">
-          <div className="flex-col w-50% overflow-wrap break-all">
+        <div className="flex xl:flex-row flex-col justify-evenly w-[100%]">
+          <div className="flex-col xl:w-[50%] w-full overflow-wrap break-all">
             <p className="p-2">
               <strong>Mã vé: </strong> {ticket._id}
             </p>
@@ -31,7 +31,7 @@ const XemChiTietVeKH = ({ isVisible, onClose, ticket }) => {
               <strong>Giá vé: </strong> {ticket.giaVe} VND
             </p>
           </div>
-          <div className="flex-col w-[50%] overflow-wrap break-all">
+          <div className="flex-col xl:w-[50%] w-full overflow-wrap break-all">
             <p className="p-2">
               <strong>Mã chuyến bay: </strong> {ticket.chuyenBayId}
             </p>

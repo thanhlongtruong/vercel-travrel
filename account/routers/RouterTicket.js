@@ -37,11 +37,7 @@ router.post("/api/post_status_donhang", async (req, res) => {
   const { maDon, trangThaiVe } = req.body;
 
   try {
-    const ticket = await Ticket.create({
-      maDon,
-      trangThaiVe,
-    });
-    res.status(200).json(ticket);
+    res.status(200).json({ message: req.body });
   } catch (err) {
     res.status(400).json({ message: err.message });
   }

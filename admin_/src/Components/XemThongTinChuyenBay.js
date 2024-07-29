@@ -9,7 +9,7 @@ const XemThongTinChuyenBay = ({ isVisible, onClose, flight }) => {
   if (!isVisible) return null;
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
-      <div className="justify-center bg-white p-6 rounded-lg w-1/2 flex-col">
+      <div className="justify-center bg-white p-6 rounded-lg lg:w-1/2 flex-col">
         <h2 className="text-center text-xl font-bold mb-4 text-blue-600">
           THÔNG TIN CHUYẾN BAY
         </h2>
