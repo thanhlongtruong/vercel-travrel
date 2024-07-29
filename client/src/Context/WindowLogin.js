@@ -278,6 +278,114 @@ export const OrderProvider = ({ children }) => {
   //!=========================================================================================================================================================================================================================================
   //? Context Flight =========================================================================================================================================================================================================================
 
+  const [time, setTime] = useState(0);
+  const [isCountingDown, setIsCountingDown] = useState(false);
+
+  useEffect(() => {
+    let interval;
+
+    if (isCountingDown && time > 0) {
+      interval = setInterval(() => {
+        setTime((prevTime) => {
+          const newTime = prevTime - 1;
+          localStorage.setItem("timeRemaining", newTime);
+          return newTime;
+        });
+      }, 1000);
+    }
+
+    if (time === 0) {
+      setIsCountingDown(false);
+      localStorage.removeItem("timeRemaining");
+      handelDeleteDataBefor30p();
+    }
+    return () => {
+      clearInterval(interval);
+    };
+  }, [isCountingDown, time]);
+
+  const handelDeleteDataBefor30p = async () => {
+    const ticketsLocal = localStorage.getItem("tickets");
+    const idDHLocal = localStorage.getItem("idDH");
+    const dataTickets = JSON.parse(ticketsLocal);
+    try {
+      const response = await fetch(
+        `https://vercel-travrel.vercel.app/api/get/flight/${dataTickets[0].chuyenBayId}`
+      );
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      const data = await response.json();
+      await hadleDeleteTicket(dataTickets);
+      await handleDeleteDH(idDHLocal);
+      await handleUpdateCB(data);
+
+      localStorage.removeItem("tickets");
+      localStorage.removeItem("idDH");
+      window.location.href =
+        "https://vercel-travrel-home.vercel.app/XemDanhSachChuyenBay";
+    } catch (error) {
+      console.error("There was a problem with your fetch operation:", error);
+    }
+  };
+
+  const hadleDeleteTicket = async (dataTickets) => {
+    try {
+      for (let i = 0; i < dataTickets.length; i++) {
+        const deleteTicket = await fetch(
+          `https://vercel-travrel.vercel.app/api/delete_ticket/${dataTickets[i]._id}`,
+          {
+            method: "DELETE",
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        );
+        if (!deleteTicket.ok || !deleteTicket) {
+          throw new Error("Network response was not ok");
+        }
+      }
+    } catch (err) {
+      console.error("Bug when xoa ve and xoa don hang");
+    }
+  };
+
+  const handleDeleteDH = async (idDHLocal) => {
+    const reqDH = await fetch(
+      `https://vercel-travrel.vercel.app/api/delete_donhang/${idDHLocal}`,
+      {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    if (!reqDH.ok || !reqDH) {
+      throw new Error("Network response was not ok");
+    }
+    console.log("Xoa don hang thanh cong");
+  };
+
+  const handleUpdateCB = async (data) => {
+    const req = await fetch(
+      `https://vercel-travrel.vercel.app/api/update/flight/${data._id}`,
+      {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          soGheThuong: data.soGheThuong,
+          soGheThuongGia: data.soGheThuongGia,
+        }),
+      }
+    );
+    if (!req.ok || !req) {
+      throw new Error("Network response was not ok");
+    }
+  };
+
+  //!
   //? list flight
   const [isFlights, setFlights] = useState([]);
 
@@ -355,6 +463,10 @@ export const OrderProvider = ({ children }) => {
   return (
     <CONTEXT.Provider
       value={{
+        time,
+        isCountingDown,
+        setTime,
+        setIsCountingDown,
         setSaveAllCb,
         handle,
         handles,

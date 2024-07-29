@@ -313,7 +313,7 @@ function DatChoCuaToi() {
       await setTickets(data);
       await sumQuantityKindTicket(data);
       console.log(check, "c");
-      if (check) {
+      if (check === true) {
         try {
           for (let i = 0; i < dataTicket.soLuongVe; i++) {
             const deleteTicket = await fetch(
@@ -350,7 +350,7 @@ function DatChoCuaToi() {
           console.error("Bug when xoa ve and xoa don hang");
         }
       }
-      if (!check) {
+      if (check === false) {
         naviTicket("/XemDanhSachChuyenbBay/DatChoCuaToi/ThanhToan", {
           state: {
             dataTicket: data,
@@ -374,7 +374,7 @@ function DatChoCuaToi() {
 
   const handleDelDH = async (idDH) => {
     try {
-      const req = fetch(
+      const req = await fetch(
         `https://vercel-travrel.vercel.app/api/delete_donhang/${idDH}`,
         {
           method: "DELETE",

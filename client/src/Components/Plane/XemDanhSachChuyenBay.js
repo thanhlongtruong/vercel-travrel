@@ -32,6 +32,7 @@ export const XemDanhSachChuyenBay = () => {
     isOpenChooseHangVe,
     isShowOptionSetting_LoginSuccess,
     isFlights,
+    isCountingDown,
   } = useContext(CONTEXT);
 
   //!new
@@ -607,7 +608,7 @@ function ShowFlight({ flights }) {
   let dtSelect1Value = localStorage.getItem("dtSelect1Value");
   let dtSelect2Value = localStorage.getItem("dtSelect2Value");
 
-  const { handleChooseOpenHangVe } = useContext(CONTEXT);
+  const { handleChooseOpenHangVe, isCountingDown, time } = useContext(CONTEXT);
   const itemRefs = useRef([]);
   const [expandedIndex, setExpandedIndex] = useState(null);
   const handleClick = useCallback(
@@ -656,15 +657,25 @@ function ShowFlight({ flights }) {
                 diemDen_={flight.diemDen}
               />
             </div>
-
-            <button
-              key={flight._id}
-              ref={(el) => (itemRefs.current[index] = el)}
-              className="bg-[#0194F3] right-3 absolute bottom-6 text-white w-fit h-fit px-[8px] py-[4px] md:px-[20px] md:py-[7px] mt-[30px] rounded-lg"
-              onClick={() => handleChooseOpenHangVe(flight)}
-            >
-              Chọn
-            </button>
+            {!isCountingDown && (
+              <button
+                key={flight._id}
+                ref={(el) => (itemRefs.current[index] = el)}
+                className="bg-[#0194F3] right-3 absolute bottom-6 text-white w-fit h-fit px-[8px] py-[4px] md:px-[20px] md:py-[7px] mt-[30px] rounded-lg"
+                onClick={() => handleChooseOpenHangVe(flight)}
+              >
+                Chọn
+              </button>
+            )}
+            {isCountingDown && (
+              <button
+                key={flight._id}
+                ref={(el) => (itemRefs.current[index] = el)}
+                className="bg-[#f52f29] right-3 absolute bottom-6 text-white w-fit h-fit px-[8px] py-[4px] md:px-[20px] md:py-[7px] mt-[30px] rounded-lg"
+              >
+                {time}
+              </button>
+            )}
           </div>
         ))}
     </div>

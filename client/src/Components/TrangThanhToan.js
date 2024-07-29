@@ -1,10 +1,23 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "../../src/TrangThanhToan.css";
 import Header from "./Header";
 import InfoTicket from "./Plane/InfoTicket";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
+import { CONTEXT } from "../Context/WindowLogin";
 function TrangThanhToan() {
+  const dataHref = useLocation();
+  if (!dataHref || !dataHref.state) {
+    window.location.href =
+      "https://vercel-travrel-home.vercel.app/XemDanhSachChuyenBay";
+  }
+  const { dataTicket, dataFlight, idDH, idUser } = dataHref.state;
+
+  localStorage.setItem("tickets", JSON.stringify(dataTicket));
+  localStorage.setItem("idDH", idDH);
+
+  const { setIsCountingDown, setTime } = useContext(CONTEXT);
+
   const [isCheckPickPay, setCheckPickPay] = useState(false);
 
   function formatNumber(num) {
@@ -16,9 +29,6 @@ function TrangThanhToan() {
   const handleCheckPickPay = () => {
     setCheckPickPay(!isCheckPickPay);
   };
-
-  const dataHref = useLocation();
-  const { dataTicket, dataFlight, idDH, idUser } = dataHref.state;
 
   let [isTongPriceTicket, setTongPriceTicket] = useState(0);
 
@@ -38,7 +48,7 @@ function TrangThanhToan() {
 
   const handlUpdateDH = async (sum) => {
     try {
-      const req = fetch(
+      const req = await fetch(
         `https://vercel-travrel.vercel.app/api/update_donhang/${dataTicket[0].maDon}`,
         {
           method: "PATCH", // Phương thức HTTP
@@ -54,15 +64,17 @@ function TrangThanhToan() {
         throw new Error("Network response was not ok");
       }
     } catch (error) {
-      console.error("Bug when delete don hang:", error);
+      console.error("Bug when update don hang:", error);
     }
   };
 
   const handlePay = async () => {
+    setIsCountingDown(true);
+    setTime(30 * 60);
     const data = {
       private_key:
         "pk_presspay_7914786efc32aa8635cad9b16b48a6e8f350e3856f39c4abc5bcc6f148536366",
-      amount: isTongPriceTicket,
+      amount: formatNumber(isTongPriceTicket),
       currency: "VND",
       message: idUser + " order " + dataTicket.length + " ticket of " + idDH,
       userID: idUser,
@@ -146,14 +158,26 @@ function TrangThanhToan() {
                 </div>
 
                 {/* //! thanh toán */}
-                <div
-                  className={`flex  p-3 ${isCheckPickPay ? "bg-orange-500 hover:bg-orange-400" : "bg-[#b8b2b2]"} select-none rounded-md mt-4 items-center justify-center cursor-pointer`}
-                  onClick={handlePay}
-                >
-                  <h1 className={`font-bold text-white text-xl`}>
-                    Thanh toán bằng PressPay
-                  </h1>
-                </div>
+                {isCheckPickPay && (
+                  <div
+                    className={`flex  p-3 ${isCheckPickPay ? "bg-orange-500 hover:bg-orange-400" : "bg-[#b8b2b2]"} select-none rounded-md mt-4 items-center justify-center cursor-pointer`}
+                    onClick={handlePay}
+                  >
+                    <h1 className={`font-bold text-white text-xl`}>
+                      Thanh toán bằng PressPay
+                    </h1>
+                  </div>
+                )}
+
+                {!isCheckPickPay && (
+                  <div
+                    className={`flex  p-3 ${isCheckPickPay ? "bg-orange-500 hover:bg-orange-400" : "bg-[#b8b2b2]"} select-none rounded-md mt-4 items-center justify-center cursor-pointer`}
+                  >
+                    <h1 className={`font-bold text-white text-xl`}>
+                      Thanh toán bằng PressPay
+                    </h1>
+                  </div>
+                )}
 
                 <h1 className="font-medium text-xs mt-4 text-center">
                   Bằng cách tiếp tục thanh toán, bạn đã đồng ý Điều khoản & Điều
