@@ -281,10 +281,12 @@ export const OrderProvider = ({ children }) => {
   const storedTime = localStorage.getItem("timeRemaining");
   const [time, setTime] = useState();
   const [isCountingDown, setIsCountingDown] = useState();
-  if (storedTime !== null) {
-    setTime(parseInt(storedTime));
-    setIsCountingDown(true);
-  }
+  useEffect(() => {
+    if (storedTime !== null) {
+      setTime(parseInt(storedTime));
+      setIsCountingDown(true);
+    }
+  }, [location]);
   useEffect(() => {
     let interval;
 
