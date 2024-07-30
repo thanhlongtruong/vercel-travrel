@@ -6,17 +6,18 @@ import { useLocation } from "react-router-dom";
 import axios from "axios";
 import { CONTEXT } from "../Context/WindowLogin";
 function TrangThanhToan() {
+
   const dataHref = useLocation();
   if (!dataHref || !dataHref.state) {
     window.location.href =
       "https://vercel-travrel-home.vercel.app/XemDanhSachChuyenBay";
+  } else {
+    
   }
   const { dataTicket, dataFlight, idDH, idUser } = dataHref.state;
 
   localStorage.setItem("tickets", JSON.stringify(dataTicket));
   localStorage.setItem("idDH", idDH);
-
-  const { setIsCountingDown, setTime } = useContext(CONTEXT);
 
   const [isCheckPickPay, setCheckPickPay] = useState(false);
 
@@ -69,8 +70,6 @@ function TrangThanhToan() {
   };
 
   const handlePay = async () => {
-    await setIsCountingDown(true);
-    await setTime(30 * 60);
     const data = {
       private_key:
         "pk_presspay_7914786efc32aa8635cad9b16b48a6e8f350e3856f39c4abc5bcc6f148536366",

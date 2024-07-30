@@ -278,8 +278,8 @@ export const OrderProvider = ({ children }) => {
   //!=========================================================================================================================================================================================================================================
   //? Context Flight =========================================================================================================================================================================================================================
 
-  const [time, setTime] = useState(0);
-  const [isCountingDown, setIsCountingDown] = useState(false);
+  const [time, setTime] = useState();
+  const [isCountingDown, setIsCountingDown] = useState();
 
   useEffect(() => {
     let interval;
@@ -311,6 +311,11 @@ export const OrderProvider = ({ children }) => {
       clearInterval(interval);
     };
   }, [isCountingDown, time]);
+
+  const handleSetTime = () => {
+    setIsCountingDown(true);
+    setTime(30 * 60);
+  };
 
   const handelDeleteDataBefor30p = async () => {
     const ticketsLocal = localStorage.getItem("tickets");
@@ -472,6 +477,7 @@ export const OrderProvider = ({ children }) => {
     <CONTEXT.Provider
       value={{
         time,
+        handleSetTime,
         isCountingDown,
         setTime,
         setIsCountingDown,

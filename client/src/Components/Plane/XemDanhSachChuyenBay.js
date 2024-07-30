@@ -673,7 +673,7 @@ function ShowFlight({ flights }) {
                 ref={(el) => (itemRefs.current[index] = el)}
                 className="bg-[#f52f29] right-3 absolute bottom-6 text-white w-fit h-fit px-[8px] py-[4px] md:px-[20px] md:py-[7px] mt-[30px] rounded-lg"
               >
-                {time}
+                {time} /s
               </button>
             )}
           </div>

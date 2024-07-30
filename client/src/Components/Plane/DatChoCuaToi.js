@@ -11,7 +11,7 @@ import { CONTEXT } from "../../Context/WindowLogin";
 
 function DatChoCuaToi() {
   const dataTicketLocation = useLocation();
-  const { userObj } = useContext(CONTEXT);
+  const { userObj, handleSetTime } = useContext(CONTEXT);
   if (dataTicketLocation === null || !dataTicketLocation.state || !userObj) {
     window.location.href =
       "https://vercel-travrel-home.vercel.app/XemDanhSachChuyenBay";
@@ -351,6 +351,7 @@ function DatChoCuaToi() {
         }
       }
       if (check === false) {
+        await handleSetTime();
         naviTicket("/XemDanhSachChuyenbBay/DatChoCuaToi/ThanhToan", {
           state: {
             dataTicket: data,
