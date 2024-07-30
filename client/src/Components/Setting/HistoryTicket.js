@@ -110,6 +110,30 @@ function HistoryDon({ id, dtChuyenBays }) {
     [historyVe]
   );
 
+  const handleHuyDon = async (donID) => {
+    try {
+      const response = await fetch(
+        `https://vercel-travrel.vercel.app/api/v1/refund`,
+        {
+          method: "POST", // Phương thức HTTP
+          headers: {
+            "Content-Type": "application/json", // Kiểu nội dung của request
+          },
+          body: JSON.stringify({
+            private_key:
+              "pk_presspay_7914786efc32aa8635cad9b16b48a6e8f350e3856f39c4abc5bcc6f148536366",
+            orderID: donID,
+          }),
+        }
+      );
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <div className="w-full h-fit">
       {donHangs &&
@@ -133,11 +157,19 @@ function HistoryDon({ id, dtChuyenBays }) {
                 <span className="font-semibold line-clamp-1">Tổng giá:</span>
                 {donhang.tongGia}
               </div>
-              <div
-                className="font-semibold line-clamp-1 cursor-pointer rounded-md bg-[#0194f3] p-2 text-white"
-                onClick={() => handleHistoryVe(index)}
-              >
-                Xem chi tiết
+              <div className="flex gap-1">
+                <div
+                  className="font-semibold line-clamp-1 cursor-pointer rounded-md text-[14px] bg-[#0194f3] p-2 self-center text-white"
+                  onClick={() => handleHistoryVe(index)}
+                >
+                  Xem chi tiết
+                </div>
+                <div
+                  className={`font-semibold line-clamp-1 cursor-pointer rounded-md text-[14px] bg-red-500 p-2 self-center text-white ${donhang.trangThai === "Đã hủy" || donhang.trangThai === "Đã thanh toán" ? "bg-slate-500" : ""}`}
+                  onClick={() => handleHuyDon(donhang._id)}
+                >
+                  Hủy đơn
+                </div>
               </div>
             </div>
             {historyVe === index && (

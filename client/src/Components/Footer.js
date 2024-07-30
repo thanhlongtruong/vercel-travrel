@@ -20,7 +20,7 @@ function Footer() {
     }
   }, [isSizeWidth]);
   return (
-    <div className="w-screen">
+    <div className="w-screen overflow-x-hidden">
       <div className="flex w-full bg-[rgba(28,41,48,1.00)] px-5 pb-[55px] pt-[55px]">
         <div className="flex w-full lg:items-start justify-center sm:flex-row">
           {!isSizeLap && (
