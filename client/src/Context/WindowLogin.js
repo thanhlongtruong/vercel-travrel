@@ -278,18 +278,17 @@ export const OrderProvider = ({ children }) => {
   //!=========================================================================================================================================================================================================================================
   //? Context Flight =========================================================================================================================================================================================================================
 
+  const storedTime = localStorage.getItem("timeRemaining");
   const [time, setTime] = useState();
   const [isCountingDown, setIsCountingDown] = useState();
-
+  if (storedTime !== null) {
+    setTime(parseInt(storedTime));
+    setIsCountingDown(true);
+  }
   useEffect(() => {
     let interval;
 
     // Kiểm tra giá trị timeRemaining trong Local Storage
-    const storedTime = localStorage.getItem("timeRemaining");
-    if (storedTime !== null) {
-      setTime(parseInt(storedTime));
-      setIsCountingDown(true);
-    }
 
     if (isCountingDown && time > 0) {
       interval = setInterval(() => {
