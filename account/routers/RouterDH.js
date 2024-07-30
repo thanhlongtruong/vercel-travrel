@@ -43,13 +43,16 @@ router.post("/api/update-status-donhang", async (req, res) => {
           (ticket) => ticket.maDon === orderID
         );
         for (const ticket of ticketsToUpdate) {
-          await fetch(`/api/update_ticket/${ticket._id}`, {
-            method: "PATCH",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ trangThaiVe: "Đã thanh toán" }),
-          });
+          await fetch(
+            `https://vercel-travrel.vercel.app/api/update_ticket/${ticket._id}`,
+            {
+              method: "PATCH",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({ trangThaiVe: "Đã thanh toán" }),
+            }
+          );
         }
       }
     }
