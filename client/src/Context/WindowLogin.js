@@ -322,6 +322,16 @@ export const OrderProvider = ({ children }) => {
     const ticketsLocal = localStorage.getItem("tickets");
     const idDHLocal = localStorage.getItem("idDH");
     const dataTickets = JSON.parse(ticketsLocal);
+
+    let quantityTicketThuong = 0;
+    let quantityTicketThuongGia = 0;
+    for (let i = 0; i < dataTickets.length; i++) {
+      if (dataTickets[i].hangVe === "Vé thường") {
+        quantityTicketThuong += 1;
+      } else if (dataTickets[i].hangVe === "Vé thương gia") {
+        quantityTicketThuongGia += 1;
+      }
+    }
     try {
       const response = await fetch(
         `https://vercel-travrel.vercel.app/api/get/flight/${dataTickets[0].chuyenBayId}`
@@ -332,7 +342,7 @@ export const OrderProvider = ({ children }) => {
       const data = await response.json();
       await hadleDeleteTicket(dataTickets);
       await handleDeleteDH(idDHLocal);
-      await handleUpdateCB(data);
+      await handleUpdateCB(data, quantityTicketThuong, quantityTicketThuongGia);
 
       localStorage.removeItem("tickets");
       localStorage.removeItem("idDH");
@@ -380,7 +390,11 @@ export const OrderProvider = ({ children }) => {
     console.log("Xoa don hang thanh cong");
   };
 
-  const handleUpdateCB = async (data) => {
+  const handleUpdateCB = async (
+    data,
+    quantityTicketThuong,
+    quantityTicketThuongGia
+  ) => {
     const req = await fetch(
       `https://vercel-travrel.vercel.app/api/update/flight/${data._id}`,
       {
@@ -389,8 +403,8 @@ export const OrderProvider = ({ children }) => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          soGheThuong: data.soGheThuong,
-          soGheThuongGia: data.soGheThuongGia,
+          soGheThuong: data.soGheThuong + quantityTicketThuong,
+          soGheThuongGia: data.soGheThuongGia + quantityTicketThuongGia,
         }),
       }
     );

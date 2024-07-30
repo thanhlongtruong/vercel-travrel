@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { memo, useContext, useEffect, useState } from "react";
 import "../../src/TrangThanhToan.css";
 import Header from "./Header";
 import InfoTicket from "./Plane/InfoTicket";
@@ -6,13 +6,12 @@ import { useLocation } from "react-router-dom";
 import axios from "axios";
 import { CONTEXT } from "../Context/WindowLogin";
 function TrangThanhToan() {
-
+  const [notiMinues, setNotiMinues] = useState(true);
   const dataHref = useLocation();
   if (!dataHref || !dataHref.state) {
     window.location.href =
       "https://vercel-travrel-home.vercel.app/XemDanhSachChuyenBay";
   } else {
-    
   }
   const { dataTicket, dataFlight, idDH, idUser } = dataHref.state;
 
@@ -96,7 +95,9 @@ function TrangThanhToan() {
   return (
     <>
       <Header />
-      <div className="bg-gray-100 w-full">
+      <div className="bg-gray-100 w-full h-full">
+        {notiMinues && <NotiMinutes setNotiMinues={setNotiMinues} />}
+
         <div className="pt-[50px] pb-[50px] bg-gray-100 flex justify-center">
           <div className="flex w-[70%] max-w-screen-xl gap-7">
             <div className="lg:w-[70%]">
@@ -201,4 +202,24 @@ function TrangThanhToan() {
     </>
   );
 }
-export default TrangThanhToan;
+
+function NotiMinutes({ setNotiMinues }) {
+  return (
+    <div className="fixed z-50 flex h-full w-full items-center justify-center bg-white/5 backdrop-brightness-75">
+      <div className="absolute z-40 m-auto flex-col flex gap-y-3 h-fit w-[450px]   ">
+        <p className="font-semibold bg-[#0194f3] text-white rounded-lg p-4 text-lg">
+          Nếu bạn không thanh toán trong vòng 30 phút hệ thống sẽ tự động hủy vé
+          của bạn. Xin cảm ơn!
+        </p>
+        <button
+          className="font-semibold text-[#0194f3] bg-white rounded-lg p-4 text-lg"
+          onClick={() => setNotiMinues(false)}
+        >
+          OK
+        </button>
+      </div>
+    </div>
+  );
+}
+
+export default memo(TrangThanhToan);

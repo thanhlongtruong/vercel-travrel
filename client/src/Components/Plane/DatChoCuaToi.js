@@ -188,7 +188,7 @@ function DatChoCuaToi() {
           quantityTicketThuongGia += 1;
         }
       }
-      console.log(quantityTicketThuong, quantityTicketThuongGia);
+
       if (quantityTicketThuong > dataFlight.soGheThuong) {
         await setNotiQuaTicket(true);
         check = true;
