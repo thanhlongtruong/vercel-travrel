@@ -21,7 +21,7 @@ router.post("/api/add_donhang", async (req, res) => {
   }
 });
 
-// router update state donhang
+// router update state donhang aa
 router.post("/api/update-status-donhang", async (req, res) => {
   const { status, orderID } = req.body;
 
